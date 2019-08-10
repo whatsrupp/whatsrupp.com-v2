@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 581 581">
+  <defs>
+    <style>.cls-1,.cls-2{fill:#2f2f2f;stroke-miterlimit:10;stroke-width:5px;}.cls-1{stroke:#47b39e;}.cls-2{stroke:#70d1aa;}.cls-3{font-size:72px;fill:#47b39e;font-family:Inconsolata, Inconsolata;}
+    </style>
+  </defs>
+  <title>coding</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M578.5,290.5a108,108,0,0,1-108-108A180,180,0,0,0,293,2.51a288,288,0,0,1,285.51,288Z"/>
+      <path class="cls-1" d="M578.5,290.5A288,288,0,0,1,293,578.49a180,180,0,0,0,177.51-180A108,108,0,0,1,578.5,290.5Z"/>
+      <path class="cls-1" d="M288,578.49A288,288,0,0,1,2.5,290.5a108,108,0,0,1,108,108A180,180,0,0,0,288,578.49Z"/>
+      <path class="cls-1" d="M288,2.51a180,180,0,0,0-177.51,180,108,108,0,0,1-108,108A288,288,0,0,1,288,2.51Z"/>
+      <path class="cls-2" d="M578.5,290.5a108,108,0,0,0-108,108A180,180,0,0,1,293,578.49h-5a180,180,0,0,1-177.51-180,108,108,0,0,0-108-108,108,108,0,0,0,108-108A180,180,0,0,1,288,2.51h5a180,180,0,0,1,177.51,180A108,108,0,0,0,578.5,290.5Z"/>
+      <text class="cls-3" transform="translate(191.5 272.5)">
+        Hello<tspan x="0" y="86.4">World;</tspan>
+      </text>
+    </g>
+</g>
+</svg>
