@@ -14,6 +14,7 @@ type IconProps = {
 
 const Icon: React.FC<IconProps> = ({animationTime, src, text, url=''}) => {
 
+
   return(
     <SC.IconLink href={url}>
       <SC.Icon animationTime={animationTime} src={src}/>
@@ -45,12 +46,16 @@ const Soundboard: React.FC = () => {
 
        <Icon text={"Coding"} animationTime={'11s'} src={icons.coding} url={"https://github.com/whatsrupp"}/>
        <Icon text={"Photography"} animationTime={'10s'} src={icons.aperture} url={"https://www.instagram.com/nick.rupp/?hl=en"}/>
-       <Icon text={"Modelling"} animationTime={'10s'} src={icons.palette}/>
+       <Icon text={"Design"} animationTime={'10s'} src={icons.palette}/>
        <Icon text={"Writing"} animationTime={'15s' }src={icons.pen} url={'https://medium.com/@nickrupp95'}/>
-       <Icon text={"Enginerring"} animationTime={'13s'} src={icons.wrench}/>
+       <Icon text={"Engineering"} animationTime={'13s'} src={icons.wrench}/>
+       <Icon text={"Modelling"} animationTime={'13s'} src={icons.model}/>
+
         </SC.Body>
         <SC.Footer>
+          <SC.FooterText>
             The original whatsrupp website design as made at the end of Makers Academy June 2017
+          </SC.FooterText>
         </SC.Footer>
        
      </SC.PageContent>

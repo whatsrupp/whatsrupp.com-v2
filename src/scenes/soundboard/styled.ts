@@ -7,9 +7,9 @@ export const PageLayout = styled(PageLayoutComponent)`
     display: flex;
     justify-content: center;
     align-items: center;
-
+    height: 100vh;
+    overflow: scroll;
     *{
-        color: ${colours.deepPurple};
         font-family: 'Montserrat', sans-serif; 
     }
 `;
@@ -17,11 +17,22 @@ export const PageLayout = styled(PageLayoutComponent)`
 export const PageContent = styled.div`
 display: grid;
 grid-template-columns: auto;
-grid-template-rows: 1fr 2fr 1fr;
+grid-template-rows: 1fr 3fr 1fr;
     height: 100%;
-    width: 100%;
-    max-width: 1000px;
-    
+    padding: 20px;
+
+    @media (min-width: 640px){
+ 
+        
+   }
+  
+
+  
+        
+        max-width: 1200px;
+  
+  
+
 `
 
 
@@ -33,9 +44,34 @@ export const Header = styled.div`
     align-items: flex-end;
 `
 export const Body = styled.div`
- display: flex;
-    justify-content:space-between;
+    display: grid;
+    justify-items:center;
     align-items: center;
+    padding: 50px 0px;
+    width: 100%;
+
+    grid-template-columns: 1fr;
+
+    @media (min-width: 640px){
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media (min-width: 900px){
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media (min-width: 1240px){
+        
+        grid-template-columns: repeat(6, 1fr) ;
+  
+    }
+ 
+        
+}
+
+
+
+ 
 `
 export const Footer = styled.div``
 
@@ -74,7 +110,7 @@ export const IconLink = styled.a`
     text-decoration:none;
     height: 150px;
     justify-content: space-between;
-
+    margin: 20px 40px;
 
 `
 
@@ -83,11 +119,12 @@ export const Icon = styled.img<ImageProps>`
     height: 100px;
     width: 100px;
     border-radius: 100px;
-
     :hover{
         cursor: pointer;
         
     }
+
+    margin-bottom: 30px;
 
     animation: float ${(props: ImageProps) => props.animationTime}};
     animation-iteration-count: infinite;
@@ -108,12 +145,12 @@ export const Icon = styled.img<ImageProps>`
 
 export const IconText = styled.p`
     color: ${colours.deepPurple};
-    display: none;
-
-    /* ${Icon}:hover & {
-		display: block;
-	} */
-`
-
 
   
+`
+
+export const FooterText = styled.p`
+        color: ${colours.deepPurple};
+        text-align: right;
+
+`
