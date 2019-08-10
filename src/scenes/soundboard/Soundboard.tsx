@@ -4,6 +4,25 @@ import * as SC from './styled'
 import icons from '../../style/icons'
 
 
+type IconProps = {
+  animationTime: string,
+  src: string,
+  text: string,
+  url?: string,
+}
+
+
+const Icon: React.FC<IconProps> = ({animationTime, src, text, url=''}) => {
+
+  return(
+    <SC.IconLink href={url}>
+      <SC.Icon animationTime={animationTime} src={src}/>
+      <SC.IconText>{text}</SC.IconText>
+    </SC.IconLink>
+  )
+
+
+}
 
 const Soundboard: React.FC = () => {
   const [text, setText] = useState('WHATS ');
@@ -24,12 +43,11 @@ const Soundboard: React.FC = () => {
        </SC.Header>
         <SC.Body>
 
-       <SC.Icon animationTime={'11s'} src={icons.coding}/>
-       <SC.Icon animationTime={'10s'} src={icons.aperture}/>
-       <SC.Icon animationTime={'12s'} src={icons.model}/>
-       <SC.Icon animationTime={'10s'} src={icons.palette}/>
-       <SC.Icon animationTime={'15s' }src={icons.pen}/>
-       <SC.Icon animationTime={'13s'} src={icons.wrench}/>
+       <Icon text={"Coding"} animationTime={'11s'} src={icons.coding} url={"https://github.com/whatsrupp"}/>
+       <Icon text={"Photography"} animationTime={'10s'} src={icons.aperture} url={"https://www.instagram.com/nick.rupp/?hl=en"}/>
+       <Icon text={"Modelling"} animationTime={'10s'} src={icons.palette}/>
+       <Icon text={"Writing"} animationTime={'15s' }src={icons.pen} url={'https://medium.com/@nickrupp95'}/>
+       <Icon text={"Enginerring"} animationTime={'13s'} src={icons.wrench}/>
         </SC.Body>
         <SC.Footer>
             The original whatsrupp website design as made at the end of Makers Academy June 2017

@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-
 import PageLayoutComponent from '../../style/components/PageLayout'
 import * as colours from '../../style/colours'
 
@@ -8,10 +7,10 @@ export const PageLayout = styled(PageLayoutComponent)`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Montserrat', sans-serif; 
 
     *{
         color: ${colours.deepPurple};
+        font-family: 'Montserrat', sans-serif; 
     }
 `;
 
@@ -68,6 +67,18 @@ type ImageProps = {
     animationTime: string
   }
 
+
+export const IconLink = styled.a`
+    display: flex;
+    flex-direction: column;
+    text-decoration:none;
+    height: 150px;
+    justify-content: space-between;
+
+
+`
+
+
 export const Icon = styled.img<ImageProps>`
     height: 100px;
     width: 100px;
@@ -94,6 +105,15 @@ export const Icon = styled.img<ImageProps>`
 	}
     }
 `;
+
+export const IconText = styled.p`
+    color: ${colours.deepPurple};
+    display: none;
+
+    /* ${Icon}:hover & {
+		display: block;
+	} */
+`
 
 
   
