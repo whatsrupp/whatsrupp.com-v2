@@ -1,8 +1,4 @@
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/core";
-
-// import { zoomIn } from "react-animations";
-// const fadeInAnimation = keyframes`${zoomIn}`;
 
 export const Button = styled.button`
   color: white;

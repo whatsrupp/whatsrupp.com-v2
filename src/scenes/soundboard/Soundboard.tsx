@@ -1,7 +1,4 @@
-import React, { Component } from "react";
-// import {
-//     SoundboardWrap, PageTitle, PageFooter, FooterText
-// } from './styled'
+import React from "react";
 
 import * as SC from "./styled";
 import * as audio from "./Audio";
