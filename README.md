@@ -1,44 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Whatsrupp.com Webapp
 
-## Available Scripts
+![travis-build-logo](https://travis-ci.org/whatsrupp/whatsrupp.com.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/whatsrupp/whatsrupp.com/badge.svg?branch=master)](https://coveralls.io/github/whatsrupp/whatsrupp.com?branch=master)
+## About
 
-In the project directory, you can run:
+A half baked attempt to put all my things and thoughts into one place. 
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Checking it out
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Online
 
-### `npm test`
+If it's live - it's [here](https://whatsrupp.com/)!
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Offline
 
-### `npm run build`
+#### Mock-Up
+If it isn't live you can either be content with this picture and leave it there:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img align="center" src="/docs/mockup.png" alt="mock-up">
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+or you can set it up locally!
 
-### `npm run eject`
+#### Local Set-Up
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### 1) Clone this repository
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+ $ cd /wherever/you/want/to/clone/whatsrupp.com-v2
+ $ git clone https://github.com/whatsrupp/whatsrupp.com-v2
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### 2) Install dependencies with yarn
 
-## Learn More
+```
+$ yarn
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### 3) Start the server
+This a rack application. Run rackup in the terminal and it should set up a local server
+```
+$ yarn start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+**_Thanks for reading and happy coding!_**
+
+_Nick Rupp_
