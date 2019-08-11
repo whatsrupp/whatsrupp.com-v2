@@ -1,9 +1,11 @@
-import styled from "@emotion/styled"
+import styled from "@emotion/styled";
 
-const Button = styled.div`
-
+const PageLayout = styled.div`
   height: 100vh;
   width: 100vw;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-export default Button
+export default PageLayout;

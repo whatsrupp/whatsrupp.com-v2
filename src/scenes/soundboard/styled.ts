@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/core";
+
+import PageLayoutComponent from "../../style/components/PageLayout";
+import * as colours from "../../style/colours";
 
 export const Button = styled.button`
   color: white;
@@ -7,6 +9,7 @@ export const Button = styled.button`
   box-sizing: border-box;
   padding: 5px;
   font-size: 1.3em;
+  font-weight: 100;
   border-radius: 5px;
   margin: 10px;
   :hover {
@@ -14,30 +17,28 @@ export const Button = styled.button`
   }
 `;
 
-const headerHeight = css`
-  height: 200px;
+export const PageLayout = styled(PageLayoutComponent)`
+  background: ${colours.teal};
+  display: grid;
+  grid-template-rows: 1fr 3fr 0.5fr;
 `;
+
+export const Header = styled.div``;
+export const Body = styled.div`
+  max-width: 800px;
+`;
+export const Footer = styled.div``;
 
 export const Picture = styled.img`
   height: 100px;
-`;
-
-export const PictureWrap = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: ${headerHeight};
-  background-color: #e6eec4;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin: 20px;
 `;
 
 export const PageTitle = styled.h1`
-  font-family: Arial, Helvetica, sans-serif;
   margin: 0px;
   text-transform: uppercase;
   padding: none;
+  font-size: 2em;
 `;
 
 export const SoundboardWrap = styled.div`
@@ -47,11 +48,6 @@ export const SoundboardWrap = styled.div`
 `;
 
 export const PageFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background: rgba(204, 204, 204, 0.5);
   display: flex;
   align-items: center;
   padding: 5px;
