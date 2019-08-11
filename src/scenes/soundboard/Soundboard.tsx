@@ -1,14 +1,33 @@
 import React from "react";
 
 import * as SC from "./styled";
-import * as audio from "./Audio";
-import SoundboardButton from "./Button";
-import PageHeader from "./PageHeader";
+import * as audio from "./assets/audio";
+
+import NathanFace from "./assets/images/NathanFace.png";
+
+type SoundboardButtonProps = {
+  audioFile: string;
+  text: string;
+};
+
+const SoundboardButton: React.FC<SoundboardButtonProps> = ({
+  audioFile,
+  text
+}) => {
+  const audio = new Audio(audioFile);
+  const handleClick = () => {
+    audio.play();
+  };
+
+  return <SC.Button onClick={handleClick}>{text}</SC.Button>;
+};
 
 const Soundboard: React.FC = () => {
   return (
     <SC.SoundboardWrap>
-      <PageHeader />
+      <SC.PictureWrap>
+        <SC.Picture src={NathanFace} />
+      </SC.PictureWrap>
       <SC.PageTitle>Soundboard King</SC.PageTitle>
       <SoundboardButton text="Fab" audioFile={audio.Fab} />
       <SoundboardButton text="Agggh" audioFile={audio.Agggh} />
