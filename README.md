@@ -1,7 +1,5 @@
 # Whatsrupp.com Webapp
 
-![travis-build-logo](https://travis-ci.org/whatsrupp/whatsrupp.com.svg?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/whatsrupp/whatsrupp.com/badge.svg?branch=master)](https://coveralls.io/github/whatsrupp/whatsrupp.com?branch=master)
 ## About
 
 A half baked attempt to put all my things and thoughts into one place. 
@@ -18,7 +16,7 @@ If it's live - it's [here](https://whatsrupp.com/)!
 #### Mock-Up
 If it isn't live you can either be content with this picture and leave it there:
 
-<img align="center" src="/docs/mockup.png" alt="mock-up">
+<img align="center" src="/docs/assets/mockup.png" alt="mock-up">
 
 
 or you can set it up locally!
