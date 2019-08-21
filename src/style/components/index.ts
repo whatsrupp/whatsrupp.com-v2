@@ -1,3 +1,7 @@
 import PageLayout from "./PageLayout";
+import PageContent from "./PageContent";
 
-export default PageLayout
+export default {
+  PageLayout,
+  PageContent
+};
