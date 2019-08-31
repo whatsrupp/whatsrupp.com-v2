@@ -3,6 +3,8 @@ import React from "react";
 import * as SC from "./styled";
 import icons from "../../style/icons";
 import NathanFace from "./assets/images/NathanFace.png";
+import LoopsLogo from "./assets/images/LoopsLogo.png";
+
 const Landing: React.FC = () => {
   return (
     <SC.PageLayout>
@@ -18,6 +20,11 @@ const Landing: React.FC = () => {
             <SC.RowHeader>whatsrupp.com v 1.0.0</SC.RowHeader>
             <SC.RowPicture src={icons.palette} />
             <SC.RowText>The original</SC.RowText>
+          </SC.Row>
+          <SC.Row to={"/loops"}>
+            <SC.RowHeader>Loops and Cats</SC.RowHeader>
+            <SC.RowPicture src={LoopsLogo} />
+            <SC.RowText>A Live Looping Recording Station</SC.RowText>
           </SC.Row>
         </SC.Body>
         <SC.Footer></SC.Footer>>
