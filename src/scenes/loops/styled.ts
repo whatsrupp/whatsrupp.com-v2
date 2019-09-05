@@ -1,14 +1,32 @@
 import styled from "@emotion/styled";
 import PageLayoutComponent from "../../style/components/PageLayout";
+import {
+  FaBeer,
+  FaTrash,
+  FaVolumeMute,
+  FaPlus,
+  FaMinus,
+  FaVolumeUp
+} from "react-icons/fa";
+
+const colours = {
+  offBlack: "#202020",
+  lightBlack: "#272727",
+  black: "#171717",
+  red: "#FF0000",
+  darkRed: "#8B0000",
+  yellow: "#DFF302",
+  offWhite: "#E3E3E3"
+};
 
 export const PageLayout = styled(PageLayoutComponent)`
-  background: #202020;
+  background: ${colours.offBlack};
   display: grid;
   grid-template-rows: 1fr 3fr 0.5fr;
 `;
 
 export const RecordButton = styled.button`
-  background: red;
+  background: ${colours.red};
   animation-name: pulse;
   animation-duration: 0.5s;
   animation-iteration-count: infinite;
@@ -16,7 +34,7 @@ export const RecordButton = styled.button`
   width: 50px;
   height: 50px;
   font-size: 0;
-  background-color: red;
+  background-color: ${colours.red};
   border: 0;
   border-radius: 50px;
   margin: 18px;
@@ -49,7 +67,12 @@ export const Header = styled.div`
   padding: 20px;
 `;
 export const Body = styled.div`
-  max-width: 800px;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 `;
 export const Footer = styled.div``;
 
@@ -66,6 +89,24 @@ export const Head = styled.img`
 `;
 
 export const Logo = styled.img`
-    width: 10%;
-    height: 10%:
+  width: 10%;
+  height: 10%;
 `;
+
+export const Track = styled.div`
+  width: 80%;
+  height: 10%;
+  display: flex;
+  background-color: ${colours.lightBlack};
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${colours.black};
+`;
+
+export const BeerIcon = styled(FaBeer)``;
+export const TrashIcon = styled(FaTrash)``;
+export const VolumeUpIcon = styled(FaVolumeUp)``;
+export const VolumeMutedIcon = styled(FaVolumeMute)``;
+export const PlusIcon = styled(FaPlus)``;
+export const MinusIcon = styled(FaMinus)``;
