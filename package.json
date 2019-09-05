@@ -13,9 +13,11 @@
     "emotion": "^10.0.14",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-icons": "^3.7.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "wavesurfer.js": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
