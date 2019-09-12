@@ -3,12 +3,11 @@ import React from "react";
 import * as SC from "./styled";
 import * as images from "./assets/images";
 import Track from "./Track";
-import AudioRecorder from "./AudioRecorder";
-
+// import getAudioRecorder from "./getAudioRecorder";
+import AudioRecorder from "./WithAudioRecorder";
 interface ILoopsProps {}
 interface ILoopsState {
   isRecording: boolean;
-  AudioContext: any;
   audioUrl: string;
 }
 
@@ -18,27 +17,40 @@ class Loops extends React.Component<ILoopsProps, ILoopsState> {
 
     this.state = {
       isRecording: false,
-      AudioContext: null,
       audioUrl: ""
     };
   }
-  componentDidMount = async () => {
-    const AudioContext = await AudioRecorder();
-    this.setState({ AudioContext });
-  };
 
-  onRecordClick = async () => {
-    const { isRecording, AudioContext } = this.state;
+  // componentDidMount = async () => {
+  //   // const AudioContext = await getAudioRecorder();
+  //   // this.setState({ AudioContext });
+  // };
 
-    if (isRecording) {
-      AudioContext.stop((audioUrl: string) => {
-        this.setState({ audioUrl });
-      });
-    } else {
-      AudioContext.start();
-    }
-    this.setState({ isRecording: !isRecording });
-  };
+  // startRecording = () => {
+  //   const { AudioContext } = this.state;
+  //   AudioContext.start();
+  //   this.setState({ isRecording: true });
+  // };
+
+  // stopRecording = () => {
+  //   const { AudioContext } = this.state;
+  //   AudioContext.stop((audioUrl: string) => {
+  //     this.setState({ audioUrl });
+  //   });
+  //   this.setState({ isRecording: false });
+  // };
+
+  // onRecordClick = async () => {};
+
+  // renderRecordingButton = () => {
+  //   const { isRecording } = this.state;
+
+  //   if (isRecording) {
+  //     return <SC.StopRecordingButton onClick={this.stopRecording} />;
+  //   } else {
+  //     return <SC.StartRecordingButton onClick={this.startRecording} />;
+  //   }
+  // };
 
   render() {
     return (
@@ -51,12 +63,22 @@ class Loops extends React.Component<ILoopsProps, ILoopsState> {
           <SC.Head src={images.viv} />
         </SC.Header>
         <SC.Body>
-          <Track />
-          <audio src={this.state.audioUrl} controls />
+          <AudioRecorder>
+            {props => {
+              console.log("props", props);
+              return <Track {...props} />;
+            }}
+          </AudioRecorder>
+
+          <AudioRecorder>
+            {props => {
+              console.log("props", props);
+              return <Track {...props} />;
+            }}
+          </AudioRecorder>
+          {/* {this.renderRecordingButton()} */}
         </SC.Body>
-        <SC.Footer>
-          <SC.RecordButton onClick={this.onRecordClick} />
-        </SC.Footer>
+        <SC.Footer></SC.Footer>
       </SC.PageLayout>
     );
   }

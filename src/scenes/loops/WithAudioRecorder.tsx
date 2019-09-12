@@ -1,8 +1,12 @@
+//@ts-nocheck
+
 import React from "react";
 
 interface IAudioRecorderProps {
   render: any;
+  children: any;
 }
+
 interface IAudioRecorderState {
   isRecording: boolean;
   AudioRecorder: any;
@@ -16,7 +20,7 @@ class AudioRecorder extends React.Component<
   IAudioRecorderProps,
   IAudioRecorderState
 > {
-  constructor(props: IAudioRecorderProps) {
+  constructor(props: any) {
     super(props);
     this.state = {
       AudioRecorder: null,
@@ -60,7 +64,8 @@ class AudioRecorder extends React.Component<
   };
 
   render() {
-    return this.props.render({
+    console.log(this.props);
+    return this.props.children({
       audioUrl: this.state.audioUrl,
       isRecording: this.state.isRecording,
       stopRecording: this.stopRecording,
@@ -68,5 +73,22 @@ class AudioRecorder extends React.Component<
     });
   }
 }
+
+interface IAudioRecorderProps {
+  isRecording: boolean;
+  startRecording: any;
+  audioUrl: string;
+  stopRecording: any;
+}
+
+// const withAudioRecorder = (Children: any) => {
+//   return (
+//     <AudioRecorder>
+//       {(audioRecorderProps: any) => {
+//         return <Children {...audioRecorderProps} />;
+//       }}
+//     </AudioRecorder>
+//   );
+// };
 
 export default AudioRecorder;

@@ -25,16 +25,11 @@ export const PageLayout = styled(PageLayoutComponent)`
   grid-template-rows: 1fr 3fr 0.5fr;
 `;
 
-export const RecordButton = styled.button`
-  background: ${colours.red};
-  animation-name: pulse;
-  animation-duration: 0.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+export const StartRecordingButton = styled.button`
+  background-color: ${colours.red};
   width: 50px;
   height: 50px;
   font-size: 0;
-  background-color: ${colours.red};
   border: 0;
   border-radius: 50px;
   margin: 18px;
@@ -45,6 +40,14 @@ export const RecordButton = styled.button`
   :hover {
     transform: scale(1.05);
   }
+`;
+
+export const StopRecordingButton = styled(StartRecordingButton)`
+  background: ${colours.red};
+  animation-name: pulse;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 
   @keyframes pulse {
     0% {
