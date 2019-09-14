@@ -4,7 +4,9 @@ import {
   FaBeer,
   FaTrash,
   FaVolumeMute,
+  FaPlay,
   FaPlus,
+  FaPause,
   FaMinus,
   FaVolumeUp
 } from "react-icons/fa";
@@ -98,15 +100,29 @@ export const Logo = styled.img`
 
 export const Track = styled.div`
   width: 80%;
-  height: 10%;
+  height: 150px;
   display: flex;
   background-color: ${colours.lightBlack};
   border-radius: 3px;
   border-width: 1px;
   border-style: solid;
   border-color: ${colours.black};
+  align-self: center;
+
+  wave {
+    width: 100%;
+  }
 `;
 
+export const PlayButton = styled.button`
+  background-color: ${colours.yellow};
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+`;
+export const PauseIcon = styled(FaPause)``;
+
+export const PlayIcon = styled(FaPlay)``;
 export const BeerIcon = styled(FaBeer)``;
 export const TrashIcon = styled(FaTrash)``;
 export const VolumeUpIcon = styled(FaVolumeUp)``;

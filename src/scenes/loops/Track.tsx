@@ -1,44 +1,114 @@
-//@ts-nocheck
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import * as SC from "./styled";
-// import AudioRecorder from "./AudioRecorder";
+import { TimingContext } from "./Loops";
 import WaveSurfer from "wavesurfer.js";
-import WithAudioRecorder from "./WithAudioRecorder";
-interface ILoopsProps {
-  AudioContext: any;
+import MicrophonePlugin from "wavesurfer.js/src/plugin/microphone.js";
+interface ITrackProps {
+  isRecording: boolean;
+  startRecording: any;
+  stopRecording: any;
+  audioUrl: string;
 }
 
-const Track: React.FC = ({
+const Track: React.FC<ITrackProps> = ({
   isRecording,
   startRecording,
   stopRecording,
   audioUrl
 }) => {
+  const timingContext = useContext(TimingContext);
+  const [waveSurfer, setWavesurfer] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(null);
+
+  useEffect(() => {
+    if (!waveSurfer) {
+      setWavesurfer(
+        WaveSurfer.create({
+          container: "#waveform",
+          waveColor: "#DFF302",
+          progressColor: "#DF2302",
+          cursorColor: "white",
+          fillParent: true,
+          height: 150,
+          normalize: true,
+          AudioContext: timingContext.AudioContext,
+          scrollParent: false,
+          plugins: [
+            MicrophonePlugin.create({
+              // plugin options ...
+            })
+          ]
+        })
+      );
+    }
+
+    if (audioUrl) {
+      console.log(waveSurfer);
+      console.log("audiourl");
+      waveSurfer.load(audioUrl);
+    }
+  }, [
+    waveSurfer,
+    audioUrl,
+    timingContext.AudioContext,
+    startRecording,
+    stopRecording
+  ]);
+
   const renderRecordingButton = () => {
+    const handleRecordStartClick = () => {
+      console.log(startRecording);
+      startRecording();
+
+      waveSurfer.microphone.start();
+    };
+
+    const handleRecordStopClick = () => {
+      console.log("microphone", waveSurfer.microphone);
+      waveSurfer.microphone.stop();
+      stopRecording();
+    };
+
     if (isRecording) {
-      return <SC.StopRecordingButton onClick={stopRecording} />;
+      return <SC.StopRecordingButton onClick={handleRecordStopClick} />;
     } else {
-      return <SC.StartRecordingButton onClick={startRecording} />;
+      return <SC.StartRecordingButton onClick={handleRecordStartClick} />;
     }
   };
 
-  // const generateWaveProfile = (audioUrl: string) => {
-  //   var wave = WaveSurfer.create({
-  //     container: "#wave",
-  //     fillParent: true,
-  //     waveColor: "#dff302",
-  //     progressColor: "#dff302"
-  //   });
-  //   wave.load(audioUrl);
-  // };
+  const renderPlayButton = () => {
+    if (!isPlaying) {
+      return (
+        <SC.PlayButton
+          onClick={() => {
+            waveSurfer.play();
+            setIsPlaying(true);
+          }}
+        >
+          <SC.PlayIcon />
+        </SC.PlayButton>
+      );
+    } else {
+      return (
+        <SC.PlayButton
+          onClick={() => {
+            waveSurfer.pause();
+            setIsPlaying(false);
+          }}
+        >
+          <SC.PauseIcon />
+        </SC.PlayButton>
+      );
+    }
+  };
 
   return (
-    <div>
-      <SC.Track id={"wave"}></SC.Track>
+    <React.Fragment>
+      <SC.Track id={"waveform"}></SC.Track>
       {renderRecordingButton()}
-      <audio src={audioUrl} controls />
-    </div>
+      {renderPlayButton()}
+    </React.Fragment>
   );
 };
 
