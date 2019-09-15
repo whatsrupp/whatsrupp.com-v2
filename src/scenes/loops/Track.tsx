@@ -34,6 +34,8 @@ const Track: React.FC<ITrackProps> = ({
           normalize: true,
           AudioContext: timingContext.AudioContext,
           scrollParent: false,
+          interact: false,
+          splitChannels: true,
           plugins: [
             MicrophonePlugin.create({
               // plugin options ...
@@ -44,8 +46,6 @@ const Track: React.FC<ITrackProps> = ({
     }
 
     if (audioUrl) {
-      console.log(waveSurfer);
-      console.log("audiourl");
       waveSurfer.load(audioUrl);
     }
   }, [
