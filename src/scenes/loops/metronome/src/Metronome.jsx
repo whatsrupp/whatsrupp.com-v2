@@ -56,7 +56,7 @@ class Metronome extends React.Component {
     this.state = {
       beat: 0,
       subBeat: 0,
-      playing: this.props.autoplay === true,
+      isPlaying: this.props.autoplay === true,
       tempo: this.props.tempo,
       beatsInBar: this.props.beatsInBar,
       subdivision: this.props.subdivision
@@ -70,7 +70,7 @@ class Metronome extends React.Component {
       }
     };
 
-    this.state.playing && this.start();
+    this.state.isPlaying && this.start();
   }
 
   componentWillUnmount() {
@@ -127,7 +127,7 @@ class Metronome extends React.Component {
 
     this.setState({
       beat: 0,
-      playing: true
+      isPlaying: true
     });
   };
 
@@ -137,12 +137,12 @@ class Metronome extends React.Component {
     });
 
     this.setState({
-      playing: false
+      isPlaying: false
     });
   };
 
   onPlay = () => {
-    this.state.playing ? this.stop() : this.start();
+    this.state.isPlaying ? this.stop() : this.start();
   };
 
   onTempoChange = tempo => {
