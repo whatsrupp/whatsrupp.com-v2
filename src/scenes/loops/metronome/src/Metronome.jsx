@@ -56,11 +56,14 @@ class Metronome extends React.Component {
     this.state = {
       beat: 0,
       subBeat: 0,
+      bar: 0,
       isPlaying: this.props.autoplay === true,
       tempo: this.props.tempo,
       beatsInBar: this.props.beatsInBar,
       subdivision: this.props.subdivision
     };
+
+    this.eventList = [];
   }
 
   componentDidMount() {
@@ -85,7 +88,7 @@ class Metronome extends React.Component {
       this.audioContext.currentTime + SCHEDULE_AHEAD_TIME
     ) {
       this.tick();
-
+      this.cueFunction();
       const secondsPerBeat = SECONDS_IN_MINUTE / this.state.tempo;
       this.nextNoteTime +=
         (this.state.beatsInBar / this.ticksPerBeat) * secondsPerBeat;
@@ -113,6 +116,18 @@ class Metronome extends React.Component {
       subBeat:
         state.subBeat === this.state.subdivision ? 1 : state.subBeat + 1 || 1
     }));
+  };
+
+  cueFunction = func => {
+    if (this.currentBeat !== 0) return;
+
+    const dummyOscillator = this.audioContext.createOscillator();
+    dummyOscillator.connect(this.audioContext.destination);
+    dummyOscillator.onended = () => {
+      func();
+    };
+    dummyOscillator.start(this.nextBeatTime);
+    dummyOscillator.stop(this.nextBeatTime);
   };
 
   start = () => {
@@ -159,7 +174,8 @@ class Metronome extends React.Component {
     return this.props.children({
       ...this.state,
       onTempoChange: this.onTempoChange,
-      onPlay: this.onPlay
+      onPlay: this.onPlay,
+      cueFunction: this.cueFunction
     });
   }
 }
