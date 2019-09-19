@@ -3,38 +3,30 @@ import PropTypes from "prop-types";
 import metronomeWorker from "./metronome.worker";
 
 import {
-  ACTION_START,
-  ACTION_STOP,
-  ACTION_UPDATE,
-  ACTION_TICK,
-  TICKS_PER_BEAT_BINARY,
-  TICKS_PER_BEAT_TERNARY,
+  START_WORKER,
+  STOP_WORKER,
+  WORKER_TICK,
   SECONDS_IN_MINUTE,
-  SCHEDULE_AHEAD_TIME,
-  NOTE_LENGTH
+  SCHEDULE_AHEAD_TIME
 } from "./constants";
 
 class Metronome extends React.Component {
   static propTypes = {
     tempo: PropTypes.number,
     beatsInBar: PropTypes.number,
+    numberOfBars: PropTypes.number,
     subdivision: PropTypes.number,
     autoplay: PropTypes.bool,
     beatFrequency: PropTypes.number,
-    beatVolume: PropTypes.number,
-    subdivisionFrequency: PropTypes.number,
-    subdivisionVolume: PropTypes.number,
     render: PropTypes.func
   };
 
   static defaultProps = {
     tempo: 120,
     beatsInBar: 4,
-    subdivision: 1,
+    numberOfBars: 4,
+    typeOfBeat: 4,
     beatFrequency: 880,
-    beatVolume: 1,
-    subdivisionFrequency: 440,
-    subdivisionVolume: 0.5,
     autoplay: false,
     render: () => null
   };
@@ -42,25 +34,17 @@ class Metronome extends React.Component {
   constructor(props) {
     super(props);
 
-    this.ticksPerBeat =
-      this.props.beatsInBar % 3 === 0 || this.props.subdivision % 3 === 0
-        ? TICKS_PER_BEAT_TERNARY
-        : TICKS_PER_BEAT_BINARY;
-
     this.timerWorker = new Worker(metronomeWorker);
     this.audioContext = new (window.AudioContext ||
       window.webkitAudioContext)();
-    this.nextNoteTime = 0;
+    this.currentBeatTime = 0;
     this.currentBeat = 0;
+    this.currentBar = 0;
 
     this.state = {
       beat: 0,
-      subBeat: 0,
       bar: 0,
-      isPlaying: this.props.autoplay === true,
-      tempo: this.props.tempo,
-      beatsInBar: this.props.beatsInBar,
-      subdivision: this.props.subdivision
+      isPlaying: this.props.autoplay === true
     };
 
     this.eventList = [];
@@ -68,7 +52,7 @@ class Metronome extends React.Component {
 
   componentDidMount() {
     this.timerWorker.onmessage = event => {
-      if (event.data === ACTION_TICK) {
+      if (event.data === WORKER_TICK) {
         this.runScheduler();
       }
     };
@@ -78,48 +62,51 @@ class Metronome extends React.Component {
 
   componentWillUnmount() {
     this.timerWorker.postMessage({
-      action: ACTION_STOP
+      action: STOP_WORKER
     });
   }
 
   runScheduler = () => {
     while (
-      this.nextNoteTime <
+      this.currentBeatTime <
       this.audioContext.currentTime + SCHEDULE_AHEAD_TIME
     ) {
       this.tick();
       this.cueFunction();
-      const secondsPerBeat = SECONDS_IN_MINUTE / this.state.tempo;
-      this.nextNoteTime +=
-        (this.state.beatsInBar / this.ticksPerBeat) * secondsPerBeat;
-      this.currentBeat++;
+      this.updateStateForNextTick();
+    }
+  };
 
-      if (this.currentBeat === this.ticksPerBeat) {
-        this.currentBeat = 0;
-      }
+  updateStateForNextTick = () => {
+    const secondsPerBeat = SECONDS_IN_MINUTE / this.props.tempo;
+    this.currentBeatTime += secondsPerBeat;
+
+    this.currentBeat++;
+
+    if (this.currentBeat === this.props.beatsInBar) {
+      this.currentBeat = 0;
+      this.currentBar++;
+    }
+
+    if (this.currentBar === this.props.numberOfBars) {
+      this.currentBar = 0;
     }
   };
 
   tick = () => {
-    const time = this.nextNoteTime;
+    const time = this.currentBeatTime;
     const osc = this.audioContext.createOscillator();
-    const gainNode = this.audioContext.createGain();
-    osc.connect(gainNode);
-    gainNode.connect(this.audioContext.destination);
+    osc.connect(this.audioContext.destination);
 
     osc.frequency.value = 220.0;
-
+    const noteLength = 0.05;
     osc.start(time);
-    osc.stop(time + NOTE_LENGTH);
-
-    this.setState(state => ({
-      subBeat:
-        state.subBeat === this.state.subdivision ? 1 : state.subBeat + 1 || 1
-    }));
+    osc.stop(time + noteLength);
   };
 
   cueFunction = func => {
     if (this.currentBeat !== 0) return;
+    if (!func) return;
 
     const dummyOscillator = this.audioContext.createOscillator();
     dummyOscillator.connect(this.audioContext.destination);
@@ -132,12 +119,10 @@ class Metronome extends React.Component {
 
   start = () => {
     this.currentBeat = 0;
-    this.nextNoteTime = this.audioContext.currentTime;
+    this.currentBeatTime = this.audioContext.currentTime;
 
     this.timerWorker.postMessage({
-      action: ACTION_START,
-      tempo: this.state.tempo,
-      subdivision: this.state.subdivision
+      action: START_WORKER
     });
 
     this.setState({
@@ -148,7 +133,7 @@ class Metronome extends React.Component {
 
   stop = () => {
     this.timerWorker.postMessage({
-      action: ACTION_STOP
+      action: STOP_WORKER
     });
 
     this.setState({
@@ -160,11 +145,7 @@ class Metronome extends React.Component {
     this.state.isPlaying ? this.stop() : this.start();
   };
 
-  onTempoChange = tempo => {
-    this.timerWorker.postMessage({
-      action: ACTION_UPDATE
-    });
-
+  changeTempo = tempo => {
     this.setState({
       tempo
     });
@@ -173,7 +154,7 @@ class Metronome extends React.Component {
   render() {
     return this.props.children({
       ...this.state,
-      onTempoChange: this.onTempoChange,
+      changeTempo: this.changeTempo,
       onPlay: this.onPlay,
       cueFunction: this.cueFunction
     });

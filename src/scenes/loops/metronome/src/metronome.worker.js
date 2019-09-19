@@ -2,10 +2,10 @@
 /* eslint-disable no-restricted-globals */
 
 const worker = () => {
-  const ACTION_START = "START";
-  const ACTION_STOP = "STOP";
+  const START_WORKER = "START";
+  const STOP_WORKER = "STOP";
   const ACTION_UPDATE = "UPDATE";
-  const ACTION_TICK = "TICK";
+  const WORKER_TICK = "TICK";
 
   const SCHEDULER_INTERVAL = 25;
   let timer = null;
@@ -16,14 +16,14 @@ const worker = () => {
     } = event;
 
     switch (action) {
-      case ACTION_START:
+      case START_WORKER:
         timer = setInterval(
-          () => self.postMessage(ACTION_TICK),
+          () => self.postMessage(WORKER_TICK),
           SCHEDULER_INTERVAL
         );
         break;
 
-      case ACTION_STOP:
+      case STOP_WORKER:
         clearInterval(timer);
         timer = null;
         break;
@@ -32,7 +32,7 @@ const worker = () => {
         if (timer) {
           clearInterval(timer);
           timer = setInterval(
-            () => self.postMessage(ACTION_TICK),
+            () => self.postMessage(WORKER_TICK),
             SCHEDULER_INTERVAL
           );
         }
@@ -40,7 +40,7 @@ const worker = () => {
 
       default:
         throw new Error(
-          `Action must be of type: ${ACTION_START}, ${ACTION_STOP} or ${ACTION_UPDATE} (received ${action}).`
+          `Action must be of type: ${START_WORKER}, ${STOP_WORKER} or ${ACTION_UPDATE} (received ${action}).`
         );
     }
   };

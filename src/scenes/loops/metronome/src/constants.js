@@ -1,7 +1,7 @@
-export const ACTION_START = "START";
-export const ACTION_STOP = "STOP";
+export const START_WORKER = "START";
+export const STOP_WORKER = "STOP";
 export const ACTION_UPDATE = "UPDATE";
-export const ACTION_TICK = "TICK";
+export const WORKER_TICK = "TICK";
 export const TICKS_PER_BEAT_BINARY = 16;
 export const TICKS_PER_BEAT_TERNARY = 12;
 export const SECONDS_IN_MINUTE = 60;
