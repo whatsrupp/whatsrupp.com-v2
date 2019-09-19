@@ -47,7 +47,7 @@ class Metronome extends React.Component {
       isPlaying: this.props.autoplay === true
     };
 
-    this.eventList = [];
+    this.cues = [];
   }
 
   componentDidMount() {
@@ -57,8 +57,20 @@ class Metronome extends React.Component {
       }
     };
 
+    this.cues = [this.metronomeCue];
+
     this.state.isPlaying && this.start();
   }
+
+  metronomeCue = ({ audioContext, currentBeatTime }) => {
+    const osc = audioContext.createOscillator();
+    osc.connect(audioContext.destination);
+
+    osc.frequency.value = 220.0;
+    const noteLength = 0.05;
+    osc.start(currentBeatTime);
+    osc.stop(currentBeatTime + noteLength);
+  };
 
   componentWillUnmount() {
     this.timerWorker.postMessage({
@@ -66,13 +78,23 @@ class Metronome extends React.Component {
     });
   }
 
+  callCues = () => {
+    this.cues.forEach(cue => {
+      cue({
+        audioContext: this.audioContext,
+        currentBeat: this.currentBeat,
+        currentBar: this.currentBar,
+        currentBeatTime: this.currentBeatTime
+      });
+    });
+  };
+
   runScheduler = () => {
     while (
       this.currentBeatTime <
       this.audioContext.currentTime + SCHEDULE_AHEAD_TIME
     ) {
-      this.tick();
-      this.cueFunction();
+      this.callCues();
       this.updateStateForNextTick();
     }
   };
@@ -91,17 +113,6 @@ class Metronome extends React.Component {
     if (this.currentBar === this.props.numberOfBars) {
       this.currentBar = 0;
     }
-  };
-
-  tick = () => {
-    const time = this.currentBeatTime;
-    const osc = this.audioContext.createOscillator();
-    osc.connect(this.audioContext.destination);
-
-    osc.frequency.value = 220.0;
-    const noteLength = 0.05;
-    osc.start(time);
-    osc.stop(time + noteLength);
   };
 
   cueFunction = func => {
