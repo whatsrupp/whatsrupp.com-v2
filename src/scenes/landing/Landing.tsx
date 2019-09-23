@@ -33,7 +33,7 @@ const Landing: React.FC = () => {
           </SC.SoundboardRow>
         </SC.FullPage>
         <SC.FullPage>
-          <SC.LoopsRow to={"/loops"}>
+          <SC.LoopsRow to={"/"}>
             <SC.RowPicture src={LoopsLogo} />
             <SC.Information>
               <SC.RowHeader>Loops and Cats</SC.RowHeader>>
