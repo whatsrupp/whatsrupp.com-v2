@@ -9,7 +9,8 @@ interface ILoopsProps {}
 export const TimingContext = React.createContext({
   AudioContext: null,
   tempo: 120,
-  beatsInBar: 4
+  beatsInBar: 4,
+  createCue: () => {}
 });
 
 const Loops: React.FC = () => {
@@ -26,40 +27,40 @@ const Loops: React.FC = () => {
     }
   }, [AudioContext]);
 
-  const renderPlayButton = (onPlay, isPlaying) => {
-    if (!isPlaying) {
-      return (
-        <SC.PlayButton
-          onClick={() => {
-            onPlay();
-          }}
-        >
-          <SC.PlayIcon />
-        </SC.PlayButton>
-      );
-    } else {
-      return (
-        <SC.PlayButton
-          onClick={() => {
-            onPlay();
-          }}
-        >
-          <SC.PauseIcon />
-        </SC.PlayButton>
-      );
-    }
-  };
-
   if (!AudioContext) {
     return <div>loading</div>;
   }
   return (
     <Metronome>
-      {({ onPlay, isPlaying }) => {
+      {({ createCue, startScheduler, stopScheduler, isPlaying }) => {
+        const renderPlayButton = () => {
+          if (!isPlaying) {
+            return (
+              <SC.PlayButton
+                onClick={() => {
+                  startScheduler();
+                }}
+              >
+                <SC.PlayIcon />
+              </SC.PlayButton>
+            );
+          } else {
+            return (
+              <SC.PlayButton
+                onClick={() => {
+                  stopScheduler();
+                }}
+              >
+                <SC.PauseIcon />
+              </SC.PlayButton>
+            );
+          }
+        };
         return (
           <TimingContext.Provider
             value={{
-              AudioContext
+              AudioContext,
+              createCue
             }}
           >
             <SC.PageLayout>
@@ -76,7 +77,7 @@ const Loops: React.FC = () => {
                     return <Track {...props} />;
                   }}
                 </AudioRecorder>
-                {renderPlayButton(onPlay, isPlaying)}
+                {renderPlayButton()}
               </SC.Body>
               <SC.Footer></SC.Footer>
             </SC.PageLayout>

@@ -47,6 +47,8 @@ class Metronome extends React.Component {
       isPlaying: this.props.autoplay === true
     };
 
+    this.idCounter = 0;
+
     this.cues = [];
   }
 
@@ -57,8 +59,7 @@ class Metronome extends React.Component {
       }
     };
 
-    this.cues = [this.metronomeCue];
-
+    this.createCue({ cueCallback: this.metronomeCue, isRecurring: true });
     this.state.isPlaying && this.start();
   }
 
@@ -79,14 +80,51 @@ class Metronome extends React.Component {
   }
 
   callCues = () => {
-    this.cues.forEach(cue => {
-      cue({
+    const cueIdsToRemove = this.cues.reduce((acc, cue) => {
+      cue.cueCallback({
         audioContext: this.audioContext,
         currentBeat: this.currentBeat,
         currentBar: this.currentBar,
-        currentBeatTime: this.currentBeatTime
+        currentBeatTime: this.currentBeatTime,
+        cueFunctionAtTime: this.cueFunctionAtTime,
+        tempo: this.props.tempo,
+        beatsInBar: this.props.beatsInBar
       });
+
+      if (!cue.isRecurring) {
+        acc.push(cue.id);
+      }
+      return acc;
+    }, []);
+
+    cueIdsToRemove.forEach(cueId => {
+      this.removeCue(cueId);
     });
+  };
+
+  removeCue = cueId => {
+    const filteredCues = this.cues.filter(cue => {
+      return cueId !== cue.id;
+    });
+
+    this.cues = filteredCues;
+  };
+
+  generateId = () => {
+    const id = this.idCounter;
+    this.idCounter++;
+    return id;
+  };
+
+  createCue = cueDefinition => {
+    const { cueCallback, isRecurring } = cueDefinition;
+    const cueId = this.generateId();
+    this.cues.push({
+      id: cueId,
+      cueCallback,
+      isRecurring
+    });
+    return cueId;
   };
 
   runScheduler = () => {
@@ -115,17 +153,17 @@ class Metronome extends React.Component {
     }
   };
 
-  cueFunction = func => {
-    if (this.currentBeat !== 0) return;
+  cueFunctionAtTime = (func, time) => {
     if (!func) return;
+    if (!time) return;
 
     const dummyOscillator = this.audioContext.createOscillator();
     dummyOscillator.connect(this.audioContext.destination);
     dummyOscillator.onended = () => {
       func();
     };
-    dummyOscillator.start(this.nextBeatTime);
-    dummyOscillator.stop(this.nextBeatTime);
+    dummyOscillator.start(time);
+    dummyOscillator.stop(time);
   };
 
   start = () => {
@@ -156,6 +194,14 @@ class Metronome extends React.Component {
     this.state.isPlaying ? this.stop() : this.start();
   };
 
+  startScheduler = () => {
+    this.start();
+  };
+
+  stopScheduler = () => {
+    this.stop();
+  };
+
   changeTempo = tempo => {
     this.setState({
       tempo
@@ -167,7 +213,10 @@ class Metronome extends React.Component {
       ...this.state,
       changeTempo: this.changeTempo,
       onPlay: this.onPlay,
-      cueFunction: this.cueFunction
+      createCue: this.createCue,
+      removeCue: this.removeCue,
+      startScheduler: this.startScheduler,
+      stopScheduler: this.stopScheduler
     });
   }
 }

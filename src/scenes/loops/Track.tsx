@@ -36,11 +36,7 @@ const Track: React.FC<ITrackProps> = ({
           scrollParent: false,
           interact: false,
           splitChannels: true,
-          plugins: [
-            MicrophonePlugin.create({
-              // plugin options ...
-            })
-          ]
+          plugins: [MicrophonePlugin.create({})]
         })
       );
     }
@@ -56,18 +52,44 @@ const Track: React.FC<ITrackProps> = ({
     stopRecording
   ]);
 
+  const handleRecordStart = () => {
+    startRecording();
+    waveSurfer.microphone.start();
+  };
+
+  const handleRecordEnd = () => {
+    stopRecording();
+    waveSurfer.microphone.stop();
+    console.log("stop");
+  };
+
   const renderRecordingButton = () => {
     const handleRecordStartClick = () => {
-      console.log(startRecording);
-      startRecording();
+      timingContext.createCue({
+        cueCallback: ({
+          currentBeat,
+          cueFunctionAtTime,
+          currentBeatTime,
+          tempo,
+          beatsInBar
+        }) => {
+          const secondsPerBeat = 60 / tempo;
+          const secondsPerBar = secondsPerBeat * beatsInBar;
 
-      waveSurfer.microphone.start();
+          const beatsUntilNewBar = beatsInBar - currentBeat;
+          const secondsUntilNewBar = secondsPerBeat * beatsUntilNewBar;
+          const timeOfStartOfNextBar = currentBeatTime + secondsUntilNewBar;
+          const timeOfEndOfNextBar = timeOfStartOfNextBar + secondsPerBar;
+          cueFunctionAtTime(handleRecordStart, timeOfStartOfNextBar);
+          cueFunctionAtTime(handleRecordEnd, timeOfEndOfNextBar);
+        },
+        isRecurring: false
+      });
     };
 
     const handleRecordStopClick = () => {
-      console.log("microphone", waveSurfer.microphone);
-      waveSurfer.microphone.stop();
-      stopRecording();
+      // waveSurfer.microphone.stop();
+      // stopRecording();
     };
 
     if (isRecording) {
@@ -77,15 +99,22 @@ const Track: React.FC<ITrackProps> = ({
     }
   };
 
+  const createPlayCue = () => {
+    timingContext.createCue({
+      cueCallback: ({ currentBeat }) => {
+        if (currentBeat === 0) {
+          waveSurfer.play();
+        }
+      },
+      isRecurring: true
+    });
+    setIsPlaying(true);
+  };
+
   const renderPlayButton = () => {
     if (!isPlaying) {
       return (
-        <SC.PlayButton
-          onClick={() => {
-            waveSurfer.play();
-            setIsPlaying(true);
-          }}
-        >
+        <SC.PlayButton onClick={createPlayCue}>
           <SC.PlayIcon />
         </SC.PlayButton>
       );
