@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import metronomeWorker from "./metronome.worker";
-
+import * as types from "./types";
 import {
   START_WORKER,
   STOP_WORKER,
@@ -10,50 +10,12 @@ import {
   SCHEDULE_AHEAD_TIME
 } from "./constants";
 
-type MetronomeProps = {
-  tempo: number;
-  beatsInBar: number;
-  numberOfBars: number;
-  children: (props: MetronomeRenderProps) => React.ReactNode;
-};
+import { MetronomeContextProvider } from "./MetronomeContext";
 
-type MetronomeState = {
-  isPlaying: boolean;
-  beat: number;
-  bar: number;
-};
-
-export type cueCallbackArgumentsType = {
-  audioContext: any;
-  currentBeat: number;
-  currentBar: number;
-  currentBeatTime: number;
-  cueFunctionAtTime: any;
-  tempo: number;
-  beatsInBar: number;
-};
-
-export type cueDefinitionType = {
-  cueCallback: (args: {
-    cueCallbackArguments: cueCallbackArgumentsType;
-    isRecurring: boolean;
-  }) => void;
-  isRecurring: Boolean;
-};
-
-type MetronomeRenderProps = {
-  audioContext: any;
-  onPlay: () => any;
-  createCue: (cueDefinition: cueDefinitionType) => number;
-  removeCue: (cueId: number) => void;
-  startScheduler: () => any;
-  stopScheduler: () => any;
-  isPlaying: boolean;
-  beat: number;
-  bar: number;
-};
-
-class Metronome extends React.Component<MetronomeProps, MetronomeState> {
+class Metronome extends React.Component<
+  types.MetronomeProps,
+  types.MetronomeState
+> {
   static propTypes = {
     tempo: PropTypes.number,
     beatsInBar: PropTypes.number,
@@ -76,7 +38,7 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
   cues: any[];
   idCounter: number;
 
-  constructor(props: MetronomeProps) {
+  constructor(props: types.MetronomeProps) {
     super(props);
 
     this.timerWorker = new Worker(metronomeWorker);
@@ -103,7 +65,7 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
       }
     };
 
-    this.state.isPlaying && this.start();
+    this.state.isPlaying && this.startSchedulerWorker();
   }
 
   componentWillUnmount() {
@@ -149,8 +111,7 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
     return id;
   };
 
-  createCue = (cueDefinition: cueDefinitionType) => {
-    const { cueCallback, isRecurring } = cueDefinition;
+  createCue = ({ cueCallback, isRecurring }: any) => {
     const cueId = this.generateId();
     this.cues.push({
       id: cueId,
@@ -186,7 +147,7 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
     }
   };
 
-  cueFunctionAtTime = (func: any, time: number) => {
+  cueFunctionAtTime = (func: Function, time: number) => {
     if (!func) return;
     if (!time) return;
 
@@ -199,7 +160,7 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
     dummyOscillator.stop(time);
   };
 
-  start = () => {
+  startSchedulerWorker = () => {
     this.currentBeat = 0;
     this.currentBeatTime = this.audioContext.currentTime;
 
@@ -213,7 +174,7 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
     });
   };
 
-  stop = () => {
+  stopSchedulerWorker = () => {
     this.timerWorker.postMessage({
       action: STOP_WORKER
     });
@@ -223,28 +184,20 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
     });
   };
 
-  onPlay = () => {
-    this.state.isPlaying ? this.stop() : this.start();
-  };
-
-  startScheduler = () => {
-    this.start();
-  };
-
-  stopScheduler = () => {
-    this.stop();
-  };
-
   render() {
-    return this.props.children({
-      ...this.state,
-      audioContext: this.audioContext,
-      onPlay: this.onPlay,
-      createCue: this.createCue,
-      removeCue: this.removeCue,
-      startScheduler: this.startScheduler,
-      stopScheduler: this.stopScheduler
-    });
+    return (
+      <MetronomeContextProvider
+        value={{
+          AudioContext: this.audioContext,
+          createCue: this.createCue,
+          removeCue: this.removeCue,
+          tempo: this.props.tempo,
+          beatsInBar: this.props.beatsInBar
+        }}
+      >
+        {this.props.children}
+      </MetronomeContextProvider>
+    );
   }
 }
 
