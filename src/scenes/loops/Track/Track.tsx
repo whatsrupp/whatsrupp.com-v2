@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 
-import * as SC from "./styled";
-import { TimingContext } from "./Loops";
+import * as SC from "../styled";
+import { useTimingContext } from "../Loops";
 import WaveSurfer from "wavesurfer.js";
 import MicrophonePlugin from "wavesurfer.js/src/plugin/microphone.js";
+
 interface ITrackProps {
   isRecording: boolean;
   startRecording: any;
@@ -17,7 +18,7 @@ const Track: React.FC<ITrackProps> = ({
   stopRecording,
   audioUrl
 }) => {
-  const timingContext = useContext(TimingContext);
+  const timingContext = useTimingContext();
   const [waveSurfer, setWavesurfer] = useState(null);
   const [isPlaying, setIsPlaying] = useState(null);
 
@@ -25,7 +26,7 @@ const Track: React.FC<ITrackProps> = ({
     if (!waveSurfer) {
       setWavesurfer(
         WaveSurfer.create({
-          container: "#waveform",
+          container: `#waveform`,
           waveColor: "#DFF302",
           progressColor: "#DF2302",
           cursorColor: "white",
@@ -101,7 +102,7 @@ const Track: React.FC<ITrackProps> = ({
 
   const createPlayCue = () => {
     timingContext.createCue({
-      cueCallback: ({ currentBeat }) => {
+      cueCallback: ({ currentBeat }: any) => {
         if (currentBeat === 0) {
           waveSurfer.play();
         }
