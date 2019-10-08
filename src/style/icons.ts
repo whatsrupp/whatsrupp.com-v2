@@ -1,9 +1,9 @@
-import aperture from "../assests/aperture.svg";
-import coding from "../assests/coding.svg";
-import model from "../assests/model.svg";
-import palette from "../assests/palette.svg";
-import pen from "../assests/pen.svg";
-import wrench from "../assests/wrench.svg";
+import aperture from "../assets/aperture.svg";
+import coding from "../assets/coding.svg";
+import model from "../assets/model.svg";
+import palette from "../assets/palette.svg";
+import pen from "../assets/pen.svg";
+import wrench from "../assets/wrench.svg";
 
 export default {
   aperture,
