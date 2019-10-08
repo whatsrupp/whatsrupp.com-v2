@@ -5,3 +5,4 @@ declare module "*.mp4" {
 }
 
 declare module "wavesurfer.js";
+declare module "wavesurfer.js/src/plugin/microphone.js";
