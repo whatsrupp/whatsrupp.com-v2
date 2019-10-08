@@ -4,14 +4,15 @@ import * as SC from "./styled";
 import * as images from "./assets/images";
 import Track from "./Track";
 import AudioRecorder from "./WithAudioRecorder";
-import Metronome from "./metronome/src/Metronome";
-interface ILoopsProps {}
-export const TimingContext = React.createContext({
-  AudioContext: null,
-  tempo: 120,
-  beatsInBar: 4,
-  createCue: () => {}
-});
+import Metronome from "./Metronome";
+
+import { TimingContextValuesType } from "./types";
+
+import createContext from "./createContext";
+
+export const [useTimingContext, TimingContextProvider] = createContext<
+  TimingContextValuesType
+>();
 
 const Loops: React.FC = () => {
   const [AudioContext, setAudioContext] = useState(null);
@@ -32,7 +33,8 @@ const Loops: React.FC = () => {
   }
   return (
     <Metronome>
-      {({ createCue, startScheduler, stopScheduler, isPlaying }) => {
+      {(args: any) => {
+        const { createCue, startScheduler, stopScheduler, isPlaying } = args;
         const renderPlayButton = () => {
           if (!isPlaying) {
             return (
@@ -57,10 +59,12 @@ const Loops: React.FC = () => {
           }
         };
         return (
-          <TimingContext.Provider
+          <TimingContextProvider
             value={{
               AudioContext,
-              createCue
+              createCue,
+              tempo: 120,
+              beatsInBar: 4
             }}
           >
             <SC.PageLayout>
@@ -73,7 +77,7 @@ const Loops: React.FC = () => {
               </SC.Header>
               <SC.Body>
                 <AudioRecorder>
-                  {props => {
+                  {(props: any) => {
                     return <Track {...props} />;
                   }}
                 </AudioRecorder>
@@ -81,7 +85,7 @@ const Loops: React.FC = () => {
               </SC.Body>
               <SC.Footer></SC.Footer>
             </SC.PageLayout>
-          </TimingContext.Provider>
+          </TimingContextProvider>
         );
       }}
     </Metronome>
