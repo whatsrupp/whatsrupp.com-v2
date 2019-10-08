@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import * as SC from "../styled";
-import { useTimingContext } from "../Loops";
+import { useMetronomeContext } from "../Metronome";
 import WaveSurfer from "wavesurfer.js";
 import MicrophonePlugin from "wavesurfer.js/src/plugin/microphone.js";
 
@@ -18,7 +18,7 @@ const Track: React.FC<ITrackProps> = ({
   stopRecording,
   audioUrl
 }) => {
-  const timingContext = useTimingContext();
+  const metronomeContext = useMetronomeContext();
   const [waveSurfer, setWavesurfer] = useState(null);
   const [isPlaying, setIsPlaying] = useState(null);
   const waveformRef = useRef();
@@ -36,7 +36,7 @@ const Track: React.FC<ITrackProps> = ({
           fillParent: true,
           height: 150,
           normalize: true,
-          AudioContext: timingContext.AudioContext,
+          AudioContext: metronomeContext.AudioContext,
           scrollParent: false,
           interact: false,
           splitChannels: true,
@@ -52,7 +52,7 @@ const Track: React.FC<ITrackProps> = ({
     waveSurfer,
     waveformRef,
     audioUrl,
-    timingContext.AudioContext,
+    metronomeContext.AudioContext,
     startRecording,
     stopRecording
   ]);
@@ -69,7 +69,7 @@ const Track: React.FC<ITrackProps> = ({
 
   const renderRecordingButton = () => {
     const handleRecordStartClick = () => {
-      timingContext.createCue({
+      metronomeContext.createCue({
         cueCallback: ({
           currentBeat,
           cueFunctionAtTime,
@@ -104,7 +104,7 @@ const Track: React.FC<ITrackProps> = ({
   };
 
   const createPlayCue = () => {
-    timingContext.createCue({
+    metronomeContext.createCue({
       cueCallback: ({ currentBeat }: any) => {
         if (currentBeat === 0) {
           waveSurfer.play();

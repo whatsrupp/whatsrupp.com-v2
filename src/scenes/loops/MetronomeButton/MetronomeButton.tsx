@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as SC from "./styled";
 import metronomeIcon from "../assets/icons/metronome.svg";
-import { useTimingContext } from "../Loops";
+import { useMetronomeContext } from "../Metronome";
 
 import { cueCallbackArgumentsType } from "../types";
 
@@ -21,10 +21,10 @@ const metronomeCue = ({
 const Metronome = () => {
   const [isActive, setIsActive] = useState(false);
   const [cueId, setCueId] = useState(null);
-  const timingContext = useTimingContext();
+  const metronomeContext = useMetronomeContext();
 
   const startMetronome = () => {
-    const cueId = timingContext.createCue({
+    const cueId = metronomeContext.createCue({
       cueCallback: metronomeCue,
       isRecurring: true
     });
@@ -32,7 +32,7 @@ const Metronome = () => {
   };
 
   const stopMetronome = () => {
-    timingContext.removeCue(cueId);
+    metronomeContext.removeCue(cueId);
   };
 
   const handleClick = () => {
