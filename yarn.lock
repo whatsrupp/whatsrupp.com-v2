@@ -1571,6 +1571,11 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
+"@types/webaudioapi@^0.0.27":
+  version "0.0.27"
+  resolved "https://registry.yarnpkg.com/@types/webaudioapi/-/webaudioapi-0.0.27.tgz#8a3f98eaa07cb577be2dae22311d37c3b545f74f"
+  integrity sha1-ij+Y6qB8tXe+La4iMR03w7VF908=
+
 "@types/yargs@^12.0.2", "@types/yargs@^12.0.9":
   version "12.0.12"
   resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-12.0.12.tgz#45dd1d0638e8c8f153e87d296907659296873916"
