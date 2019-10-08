@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 
 import * as SC from "./styled";
 import icons from "../../style/icons";
