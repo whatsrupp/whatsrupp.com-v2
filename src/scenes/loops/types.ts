@@ -16,6 +16,7 @@ export type TimingContextValuesType = {
   tempo: number;
   beatsInBar: number;
   createCue: createCueArguments;
+  removeCue: (cueId: number) => void;
 };
 
 export type cueCallbackArgumentsType = {
@@ -23,7 +24,7 @@ export type cueCallbackArgumentsType = {
   currentBeat: number;
   currentBar: number;
   currentBeatTime: number;
-  cueFunctionAtTime: any;
+  cueFunctionAtTime: (callbackFunction: Function, time: number) => void;
   tempo: number;
   beatsInBar: number;
 };
