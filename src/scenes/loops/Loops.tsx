@@ -5,7 +5,7 @@ import * as images from "./assets/images";
 import Track from "./Track";
 import AudioRecorder from "./WithAudioRecorder";
 import Metronome from "./Metronome";
-
+import MetronomeButton from "./MetronomeButton";
 import { TimingContextValuesType } from "./types";
 
 import createContext from "./createContext";
@@ -34,35 +34,14 @@ const Loops: React.FC = () => {
   return (
     <Metronome>
       {(args: any) => {
-        const { createCue, startScheduler, stopScheduler, isPlaying } = args;
-        const renderPlayButton = () => {
-          if (!isPlaying) {
-            return (
-              <SC.PlayButton
-                onClick={() => {
-                  startScheduler();
-                }}
-              >
-                <SC.PlayIcon />
-              </SC.PlayButton>
-            );
-          } else {
-            return (
-              <SC.PlayButton
-                onClick={() => {
-                  stopScheduler();
-                }}
-              >
-                <SC.PauseIcon />
-              </SC.PlayButton>
-            );
-          }
-        };
+        const { audioContext, createCue, removeCue } = args;
+
         return (
           <TimingContextProvider
             value={{
-              AudioContext,
+              AudioContext: audioContext,
               createCue,
+              removeCue,
               tempo: 120,
               beatsInBar: 4
             }}
@@ -81,7 +60,7 @@ const Loops: React.FC = () => {
                     return <Track {...props} />;
                   }}
                 </AudioRecorder>
-                {renderPlayButton()}
+                <MetronomeButton />
               </SC.Body>
               <SC.Footer></SC.Footer>
             </SC.PageLayout>
