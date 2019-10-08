@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import * as SC from "../styled";
 import { useTimingContext } from "../Loops";
@@ -21,12 +21,15 @@ const Track: React.FC<ITrackProps> = ({
   const timingContext = useTimingContext();
   const [waveSurfer, setWavesurfer] = useState(null);
   const [isPlaying, setIsPlaying] = useState(null);
+  const waveformRef = useRef();
 
   useEffect(() => {
+    if (!waveformRef) return;
+
     if (!waveSurfer) {
       setWavesurfer(
         WaveSurfer.create({
-          container: `#waveform`,
+          container: waveformRef.current,
           waveColor: "#DFF302",
           progressColor: "#DF2302",
           cursorColor: "white",
@@ -47,6 +50,7 @@ const Track: React.FC<ITrackProps> = ({
     }
   }, [
     waveSurfer,
+    waveformRef,
     audioUrl,
     timingContext.AudioContext,
     startRecording,
@@ -61,7 +65,6 @@ const Track: React.FC<ITrackProps> = ({
   const handleRecordEnd = () => {
     stopRecording();
     waveSurfer.microphone.stop();
-    console.log("stop");
   };
 
   const renderRecordingButton = () => {
@@ -135,7 +138,7 @@ const Track: React.FC<ITrackProps> = ({
 
   return (
     <React.Fragment>
-      <SC.Track id={"waveform"}></SC.Track>
+      <SC.Track ref={waveformRef} id={"waveform"}></SC.Track>
       {renderRecordingButton()}
       {renderPlayButton()}
     </React.Fragment>
