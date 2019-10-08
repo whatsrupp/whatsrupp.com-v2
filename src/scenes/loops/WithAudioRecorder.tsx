@@ -1,16 +1,15 @@
 import React from "react";
 
-interface IAudioRecorderProps {
-  render: any;
+type IAudioRecorderProps = {
   children: any;
-}
+};
 
-interface IAudioRecorderState {
+type IAudioRecorderState = {
   isRecording: boolean;
   AudioRecorder: any;
   audioUrl: string;
   audioChunks: any;
-}
+};
 
 declare const MediaRecorder: any;
 
@@ -69,13 +68,6 @@ class AudioRecorder extends React.Component<
       startRecording: this.startRecording
     });
   }
-}
-
-interface IAudioRecorderProps {
-  isRecording: boolean;
-  startRecording: any;
-  audioUrl: string;
-  stopRecording: any;
 }
 
 export default AudioRecorder;
