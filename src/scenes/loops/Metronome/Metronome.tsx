@@ -42,6 +42,7 @@ export type cueDefinitionType = {
 };
 
 type MetronomeRenderProps = {
+  audioContext: any;
   onPlay: () => any;
   createCue: (cueDefinition: cueDefinitionType) => number;
   removeCue: (cueId: number) => void;
@@ -87,7 +88,7 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
     this.state = {
       beat: 0,
       bar: 0,
-      isPlaying: false
+      isPlaying: true
     };
 
     this.idCounter = 0;
@@ -102,19 +103,8 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
       }
     };
 
-    this.createCue({ cueCallback: this.metronomeCue, isRecurring: true });
     this.state.isPlaying && this.start();
   }
-
-  metronomeCue = () => {
-    const osc = this.audioContext.createOscillator();
-    osc.connect(this.audioContext.destination);
-
-    osc.frequency.value = 220.0;
-    const noteLength = 0.05;
-    osc.start(this.currentBeatTime);
-    osc.stop(this.currentBeatTime + noteLength);
-  };
 
   componentWillUnmount() {
     this.timerWorker.postMessage({
@@ -248,6 +238,7 @@ class Metronome extends React.Component<MetronomeProps, MetronomeState> {
   render() {
     return this.props.children({
       ...this.state,
+      audioContext: this.audioContext,
       onPlay: this.onPlay,
       createCue: this.createCue,
       removeCue: this.removeCue,
