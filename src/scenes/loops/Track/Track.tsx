@@ -138,7 +138,7 @@ const Track: React.FC<ITrackProps> = ({
 
   return (
     <React.Fragment>
-      <SC.Track ref={waveformRef} id={"waveform"}></SC.Track>
+      <SC.Track ref={waveformRef}></SC.Track>
       {renderRecordingButton()}
       {renderPlayButton()}
     </React.Fragment>

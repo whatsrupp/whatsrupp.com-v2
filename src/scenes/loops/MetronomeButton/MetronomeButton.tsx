@@ -3,12 +3,12 @@ import * as SC from "./styled";
 import metronomeIcon from "../assets/icons/metronome.svg";
 import { useMetronomeContext } from "../Metronome";
 
-import { cueCallbackArgumentsType } from "../types";
+import { types } from "../Metronome";
 
 const metronomeCue = ({
   audioContext,
   currentBeatTime
-}: cueCallbackArgumentsType) => {
+}: types.cueCallbackArguments) => {
   const osc = audioContext.createOscillator();
   osc.connect(audioContext.destination);
 
