@@ -3,6 +3,7 @@ import PageLayoutComponent from "../../style/components/PageLayout";
 import * as colours from "../../style/colours";
 import components from "../../style/components";
 import { Link } from "react-router-dom";
+
 export const PageLayout = styled(PageLayoutComponent)`
   display: flex;
   justify-content: center;
@@ -40,18 +41,6 @@ export const Body = styled.div`
   width: 100%;
   grid-template-columns: 1fr;
   grid-gap: 30px;
-
-  /* @media (min-width: 640px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (min-width: 900px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  @media (min-width: 1240px) {
-    grid-template-columns: repeat(6, 1fr);
-  } */
 `;
 
 export const Row = styled(Link)`
@@ -77,41 +66,26 @@ export const Row = styled(Link)`
 `;
 
 export const SoundboardRow = styled(Row)`
-  background: #093028; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #237a57,
-    #093028
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #237a57,
-    #093028
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #093028;
+  background: -webkit-linear-gradient(to right, #237a57, #093028);
+  background: linear-gradient(to right, #237a57, #093028);
 `;
 
 export const PortfolioRow = styled(Row)`
-  background: #2c3e50; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #4ca1af,
-    #2c3e50
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #4ca1af,
-    #2c3e50
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #2c3e50;
+  background: -webkit-linear-gradient(to right, #4ca1af, #2c3e50);
+  background: linear-gradient(to right, #4ca1af, #2c3e50);
 `;
 
 export const LoopsRow = styled(Row)`
-  background: #0f2027; /* fallback for old browsers */
-  background: linear-gradient(
-    to right,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #0f2027;
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+`;
+
+export const LandGridRow = styled(Row)`
+  background: #355c7d;
+  background: -webkit-linear-gradient(to right, #c06c84, #6c5b7b, #355c7d);
+  background: linear-gradient(to right, #c06c84, #6c5b7b, #355c7d);
 `;
 
 export const RowPicture = styled.img`
