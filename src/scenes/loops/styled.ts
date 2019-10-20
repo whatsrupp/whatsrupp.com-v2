@@ -22,7 +22,18 @@ const colours = {
 };
 
 export const PageLayout = styled(PageLayoutComponent)`
-  background: ${colours.offBlack};
+  background: #304352; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #d7d2cc,
+    #304352
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #d7d2cc,
+    #304352
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   display: grid;
   grid-template-rows: 1fr 3fr 0.5fr;
 `;
@@ -102,7 +113,6 @@ export const Track = styled.div`
   width: 80%;
   height: 150px;
   display: flex;
-  background-color: ${colours.lightBlack};
   border-radius: 3px;
   border-width: 1px;
   border-style: solid;
