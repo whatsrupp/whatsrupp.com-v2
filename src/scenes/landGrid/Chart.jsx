@@ -1,7 +1,7 @@
-import axios from "axios";
-import React, { useRef, useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useRef, useEffect } from "react";
+import styled from "@emotion/styled";
 import echarts from "echarts";
+import data from "./data";
 
 const ChartContainer = styled.div`
   height: 100%;
@@ -10,15 +10,6 @@ const ChartContainer = styled.div`
 
 const Chart = () => {
   const chartContainerRef = useRef(null);
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const getData = async () => {
-      const result = await axios.get("http://localhost:3001");
-      setData(result.data);
-    };
-    getData();
-  }, []);
 
   useEffect(() => {
     if (!chartContainerRef) return;
@@ -126,7 +117,7 @@ const Chart = () => {
         }
       ]
     });
-  }, [chartContainerRef, data]);
+  }, [chartContainerRef]);
 
   return <ChartContainer ref={chartContainerRef} />;
 };
