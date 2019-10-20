@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import * as SC from "../styled";
+import * as SC from "./styled";
 import { useMetronomeContext } from "../Metronome";
 import WaveSurfer from "wavesurfer.js";
 import MicrophonePlugin from "wavesurfer.js/src/plugin/microphone.js";
@@ -21,7 +21,9 @@ const Track: React.FC<ITrackProps> = ({
   const metronomeContext = useMetronomeContext();
   const [waveSurfer, setWavesurfer] = useState(null);
   const [isPlaying, setIsPlaying] = useState(null);
-  const waveformRef = useRef();
+  const [isMuted, setIsMuted] = useState(null);
+
+  const waveformRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!waveformRef) return;
@@ -34,12 +36,12 @@ const Track: React.FC<ITrackProps> = ({
           progressColor: "#DF2302",
           cursorColor: "white",
           fillParent: true,
-          height: 150,
+          height: waveformRef.current.offsetHeight,
           normalize: true,
           AudioContext: metronomeContext.AudioContext,
           scrollParent: false,
           interact: false,
-          splitChannels: true,
+          responsive: true,
           plugins: [MicrophonePlugin.create({})]
         })
       );
@@ -62,9 +64,22 @@ const Track: React.FC<ITrackProps> = ({
     waveSurfer.microphone.start();
   };
 
+  const createPlayCue = () => {
+    metronomeContext.createCue({
+      cueCallback: ({ currentBeat }: any) => {
+        if (currentBeat === 0) {
+          waveSurfer.play();
+        }
+      },
+      isRecurring: true
+    });
+    setIsPlaying(true);
+  };
+
   const handleRecordEnd = () => {
     stopRecording();
     waveSurfer.microphone.stop();
+    createPlayCue();
   };
 
   const renderRecordingButton = () => {
@@ -103,44 +118,32 @@ const Track: React.FC<ITrackProps> = ({
     }
   };
 
-  const createPlayCue = () => {
-    metronomeContext.createCue({
-      cueCallback: ({ currentBeat }: any) => {
-        if (currentBeat === 0) {
-          waveSurfer.play();
-        }
-      },
-      isRecurring: true
-    });
-    setIsPlaying(true);
-  };
+  const renderMuteButton = () => {
+    const Icon = isMuted ? SC.VolumeMutedIcon : SC.VolumeUpIcon;
 
-  const renderPlayButton = () => {
-    if (!isPlaying) {
-      return (
-        <SC.PlayButton onClick={createPlayCue}>
-          <SC.PlayIcon />
-        </SC.PlayButton>
-      );
-    } else {
-      return (
-        <SC.PlayButton
-          onClick={() => {
-            waveSurfer.pause();
-            setIsPlaying(false);
-          }}
-        >
-          <SC.PauseIcon />
-        </SC.PlayButton>
-      );
-    }
+    return (
+      <div
+        onClick={() => {
+          waveSurfer.toggleMute();
+          setIsMuted(!isMuted);
+        }}
+      >
+        <Icon />
+      </div>
+    );
   };
 
   return (
     <React.Fragment>
-      <SC.Track ref={waveformRef}></SC.Track>
-      {renderRecordingButton()}
-      {renderPlayButton()}
+      <SC.TrackWrapper>
+        <SC.WaveformContainer ref={waveformRef}></SC.WaveformContainer>
+        <SC.ControlsContainer>
+          <SC.RecordingButtonContainer>
+            {renderRecordingButton()}
+          </SC.RecordingButtonContainer>
+          <SC.MuteContainer>{renderMuteButton()}</SC.MuteContainer>
+        </SC.ControlsContainer>
+      </SC.TrackWrapper>
     </React.Fragment>
   );
 };
