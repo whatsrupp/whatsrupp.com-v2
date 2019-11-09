@@ -35,7 +35,29 @@ describe("Segment", () => {
     expect(text).toBeDefined();
   });
 
-  describe("segment path definition", () => {});
+  it("centres the text in the segment and applies the correct rotation", () => {
+    const testProps = {
+      startAngle: 0,
+      sweepAngle: 180,
+      outerRadius: 10,
+      innerRadius: 0,
+      text: "test text"
+    };
+    const container = render(
+      <svg>
+        <Segment {...testProps} />
+      </svg>
+    );
+
+    const text = container.getByText("test text");
+    const x = text.getAttribute("x");
+    const y = text.getAttribute("y");
+    const transformDefinition = text.getAttribute("transform");
+
+    expect(x).toEqual("5");
+    expect(y).toEqual("0");
+    expect(transformDefinition).toEqual(`rotate(-90 5 0)`);
+  });
 
   describe("segment path definitions", () => {
     let expectedPathDefinition;

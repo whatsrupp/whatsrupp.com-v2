@@ -14,18 +14,28 @@ interface ISegmentProperties {
   text: string;
 }
 
-interface ISegmentDefinition {
+interface ISegmentConstraints {
   sweepAngle: number;
   startAngle: number;
   outerRadius: number;
   innerRadius: number;
-  rotation: number;
 }
 
-type SegmentProps = ISegmentDefinition & ISegmentProperties;
+interface ISegmentTransforms {
+  angularOffset: number;
+  radialOffset: number;
+}
+
+type SegmentProps = ISegmentConstraints &
+  ISegmentProperties &
+  ISegmentTransforms;
 
 const inRadians = (degrees: number) => {
   return (degrees * Math.PI) / 180;
+};
+
+const inDegrees = (radians: number) => {
+  return (radians * 180) / Math.PI;
 };
 
 const Segment = (props: SegmentProps) => {
@@ -43,6 +53,8 @@ const Segment = (props: SegmentProps) => {
   const sweepAngle = inRadians(sweepAngleDegrees);
   const startAngle = inRadians(startAngleDegrees);
   const centreAngle = (sweepAngle - startAngle) / 2;
+  const textAngle = inDegrees(-centreAngle);
+
   const endAngle = startAngle + sweepAngle;
   const r = innerRadius;
   const R = outerRadius;
@@ -91,7 +103,17 @@ const Segment = (props: SegmentProps) => {
   return (
     <>
       <path data-testid="segment-path" d={pathDefinition} />
-      <text>{text}</text>
+      <text
+        x={centre.x}
+        y={centre.y}
+        fontSize={5}
+        dominantBaseline="middle"
+        style={{ userSelect: "none" }}
+        textAnchor="middle"
+        transform={`rotate(${textAngle} ${centre.x} ${centre.y})`}
+      >
+        {text}
+      </text>
     </>
   );
 };
