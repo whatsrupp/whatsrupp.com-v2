@@ -19,24 +19,13 @@ interface ISegmentDefinition {
   startAngle: number;
   outerRadius: number;
   innerRadius: number;
-  centreCoordinates: CartesianCoordinates;
   rotation: number;
 }
 
 type SegmentProps = ISegmentDefinition & ISegmentProperties;
-type GenerateSegmentCoordinates = ISegmentDefinition;
 
 const inRadians = (degrees: number) => {
   return (degrees * Math.PI) / 180;
-};
-
-const inCartesianCoordinates = (
-  polarCoordinates: PolarCoordinates
-): CartesianCoordinates => {
-  const { r, theta } = polarCoordinates;
-  const x = r * Math.sin(theta);
-  const y = r * Math.cos(theta);
-  return { x: parseFloat(x.toFixed(4)), y: parseFloat(y.toFixed(4)) };
 };
 
 const Segment = (props: SegmentProps) => {
@@ -46,17 +35,15 @@ const Segment = (props: SegmentProps) => {
     startAngle: startAngleDegrees = 0,
     outerRadius = 10,
     innerRadius = 0,
-    centreCoordinates = { x: 0, y: 0 },
-    rotation = 0
+    angularOffset: angularOffsetDegrees = 0,
+    radialOffset = 0
   } = props;
 
+  const angularOffset = inRadians(angularOffsetDegrees);
   const sweepAngle = inRadians(sweepAngleDegrees);
   const startAngle = inRadians(startAngleDegrees);
   const centreAngle = (sweepAngle - startAngle) / 2;
   const endAngle = startAngle + sweepAngle;
-  const cx = centreCoordinates.x;
-  const cy = centreCoordinates.y;
-  const pi = Math.PI;
   const r = innerRadius;
   const R = outerRadius;
   const centreRadius = r + (R - r) / 2;
@@ -72,7 +59,19 @@ const Segment = (props: SegmentProps) => {
           4 -<- 3
     */
 
-  const point1 = inCartesianCoordinates({ r: R, theta: startAngle });
+  const inCartesianCoordinates = (
+    polarCoordinates: PolarCoordinates
+  ): CartesianCoordinates => {
+    const { r, theta } = polarCoordinates;
+    const x = (r + radialOffset) * Math.sin(theta + angularOffset);
+    const y = (r + radialOffset) * Math.cos(theta + angularOffset);
+    return { x: parseFloat(x.toFixed(4)), y: parseFloat(y.toFixed(4)) };
+  };
+
+  const point1 = inCartesianCoordinates({
+    r: R,
+    theta: startAngle
+  });
   const point2 = inCartesianCoordinates({ r: R, theta: endAngle });
   const point3 = inCartesianCoordinates({ r, theta: endAngle });
   const point4 = inCartesianCoordinates({ r, theta: startAngle });
