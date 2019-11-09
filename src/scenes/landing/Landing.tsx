@@ -6,6 +6,7 @@ import NathanFace from "./assets/images/NathanFace.png";
 import LoopsLogo from "./assets/images/LoopsLogo.png";
 import ReactPageScroller from "react-page-scroller";
 import LandGridLogo from "../landGrid/Logo";
+import ColourWheelIcon from "../wheel/assets/Logo";
 
 type RowProps = {
   RowComponent: any;
@@ -82,8 +83,16 @@ const Landing: React.FC = () => {
           IconComponent={LandGridLogo}
           header={"Land Grid"}
           text={
-            " An interactive chart to display the location and relative pricing of houses"
+            "An interactive chart to display the location and relative pricing of houses"
           }
+        />
+
+        <Row
+          RowComponent={SC.WheelRow}
+          link={"/wheel"}
+          IconComponent={ColourWheelIcon}
+          header={"Camelot Wheel"}
+          text={"An animated svg"}
         />
       </ReactPageScroller>
     </SC.PageLayout>

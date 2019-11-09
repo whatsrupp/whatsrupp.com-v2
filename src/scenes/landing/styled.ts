@@ -88,6 +88,12 @@ export const LandGridRow = styled(Row)`
   background: linear-gradient(to right, #c06c84, #6c5b7b, #355c7d);
 `;
 
+export const WheelRow = styled(Row)`
+  background: #59c173;
+  background: -webkit-linear-gradient(to right, #5d26c1, #a17fe0, #59c173);
+  background: linear-gradient(to right, #5d26c1, #a17fe0, #59c173);
+`;
+
 export const RowPicture = styled.img`
   height: 100px;
   z-index: 0;
