@@ -8,7 +8,7 @@ const Wheel: React.FC = () => {
   const sweep = useSlider({ label: "Sweep", min: 0, max: 359 });
   const startAngle = useSlider({ label: "Start Angle", min: 0, max: 359 });
   const outerRadius = useSlider({ label: "Outer Radius", min: 0, max: 100 });
-  const innerRadius = useSlider({ label: "Inner Radius", min: 0, max: 95 });
+  const innerRadius = useSlider({ label: "Inner Radius", min: 0, max: 90 });
   const angularOffset = useSlider({
     label: "Angular Offset",
     min: 0,
@@ -23,7 +23,7 @@ const Wheel: React.FC = () => {
       <SC.Header></SC.Header>
 
       <SC.Body>
-        <svg
+        <SC.SegmentSvg
           height={500}
           width={500}
           viewBox={`${-canvasWidth / 2} ${-canvasHeight /
@@ -38,7 +38,7 @@ const Wheel: React.FC = () => {
             radialOffset={0}
             text={""}
           />
-        </svg>
+        </SC.SegmentSvg>
 
         <Slider {...sweep} />
         <Slider {...startAngle} />
