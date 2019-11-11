@@ -2,14 +2,22 @@ import React from "react";
 
 import * as SC from "./styled";
 import Segment from "./Segment";
-import { Slider, useSlider } from "./Slider";
+import { Slider, useSliderProps } from "./Slider";
 
 const Wheel: React.FC = () => {
-  const sweep = useSlider({ label: "Sweep", min: 0, max: 359 });
-  const startAngle = useSlider({ label: "Start Angle", min: 0, max: 359 });
-  const outerRadius = useSlider({ label: "Outer Radius", min: 0, max: 100 });
-  const innerRadius = useSlider({ label: "Inner Radius", min: 0, max: 90 });
-  const angularOffset = useSlider({
+  const sweep = useSliderProps({ label: "Sweep", min: 0, max: 359 });
+  const startAngle = useSliderProps({ label: "Start Angle", min: 0, max: 359 });
+  const outerRadius = useSliderProps({
+    label: "Outer Radius",
+    min: 0,
+    max: 100
+  });
+  const innerRadius = useSliderProps({
+    label: "Inner Radius",
+    min: 0,
+    max: 90
+  });
+  const angularOffset = useSliderProps({
     label: "Angular Offset",
     min: 0,
     max: 360

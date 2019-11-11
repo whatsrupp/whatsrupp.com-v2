@@ -1,7 +1,7 @@
 import React from "react";
 import { render, wait, fireEvent } from "@testing-library/react";
 import Slider from "./Slider";
-import useSlider from "./useSlider";
+import useSliderProps from "./useSliderProps";
 
 describe("Slider", () => {
   it("passes the contrainsts of the range component into the", async () => {
@@ -39,10 +39,10 @@ describe("Slider", () => {
   });
 });
 
-describe("useSlider", () => {
+describe("useSliderProps", () => {
   it("controls the value of a slider", async () => {
     const TestComponent = () => {
-      const props = useSlider({ label: "hi", min: 0, max: 100 });
+      const props = useSliderProps({ label: "hi", min: 0, max: 100 });
       return (
         <>
           <div data-testid="output"> {props.value}</div>

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-type UseSlider = {
+type UseSliderProps = {
   label: string;
   min: number;
   max: number;
 };
 
-const useSlider = ({ label, min, max }: UseSlider) => {
+const useSliderProps = ({ label, min, max }: UseSliderProps) => {
   const [value, setValue] = useState((min + max) / 2);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,4 +18,4 @@ const useSlider = ({ label, min, max }: UseSlider) => {
   return sliderProps;
 };
 
-export default useSlider;
+export default useSliderProps;

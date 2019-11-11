@@ -1,5 +1,5 @@
 import Slider from "./Slider";
-import useSlider from "./useSlider";
+import useSliderProps from "./useSliderProps";
 
-export { useSlider, Slider };
+export { useSliderProps, Slider };
 export default Slider;

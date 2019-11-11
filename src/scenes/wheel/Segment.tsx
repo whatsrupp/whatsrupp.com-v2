@@ -69,7 +69,7 @@ const Segment = (props: SegmentProps) => {
         \    c    /
          \       /
           4 -<- 3
-    */
+  */
 
   const inCartesianCoordinates = (
     polarCoordinates: PolarCoordinates
