@@ -24,6 +24,19 @@ describe("Slider", () => {
     fireEvent.change(input, { target: { value: 20 } });
     expect(mockOnChange).toHaveBeenCalled();
   });
+
+  it("displays the min, max and current value", async () => {
+    const container = render(
+      <Slider min={0} max={100} value={50} onChange={jest.fn()} />
+    );
+    const max = await container.queryByText("0");
+    const min = await container.queryByText("100");
+    const value = await container.queryByText("50");
+
+    expect(max).not.toBeNull();
+    expect(min).not.toBeNull();
+    expect(value).not.toBeNull();
+  });
 });
 
 describe("useSlider", () => {
@@ -44,7 +57,7 @@ describe("useSlider", () => {
     expect(output).toBeNull();
     output = await container.findByRole("textbox");
     fireEvent.change(output, { target: { value: 20 } });
-    output = await container.findByText("20");
+    output = await container.findAllByText("20");
 
     expect(output).toBeDefined();
   });
