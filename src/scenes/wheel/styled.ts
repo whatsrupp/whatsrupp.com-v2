@@ -11,5 +11,9 @@ export const PageLayout = styled(PageLayoutComponent)`
 export const Header = styled.div``;
 export const Body = styled.div`
   max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 export const Footer = styled.div``;
