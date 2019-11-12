@@ -16,6 +16,7 @@
     "emotion": "^10.0.14",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-ga": "^2.7.0",
     "react-icons": "^3.7.0",
     "react-inlinesvg": "^1.1.7",
     "react-page-scroller": "^1.5.1",
