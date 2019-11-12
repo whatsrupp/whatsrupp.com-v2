@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import withTracker from "./withTracker";
 
 import Portfolio from "./scenes/portfolio/Portfolio";
 import Soundboard from "./scenes/soundboard/Soundboard";
@@ -18,12 +19,12 @@ const App: React.FC = () => {
     <div className="App">
       <Router>
         <Global styles={globalStyles} />
-        <Route path="/" exact component={Landing} />
-        <Route path="/portfolio" exact component={Portfolio} />
-        <Route path="/soundboard" exact component={Soundboard} />
-        <Route path="/loops" exact component={Loops} />
-        <Route path="/land-grid" exact component={LandGrid} />
-        <Route path="/wheel" exact component={Wheel} />
+        <Route path="/" exact component={withTracker(Landing)} />
+        <Route path="/portfolio" exact component={withTracker(Portfolio)} />
+        <Route path="/soundboard" exact component={withTracker(Soundboard)} />
+        <Route path="/loops" exact component={withTracker(Loops)} />
+        <Route path="/land-grid" exact component={withTracker(LandGrid)} />
+        <Route path="/wheel" exact component={withTracker(Wheel)} />
       </Router>
     </div>
   );
