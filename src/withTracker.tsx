@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
-import ReactGA, { FieldsObject } from "react-ga";
+import { FieldsObject } from "react-ga";
 import { RouteComponentProps } from "react-router-dom";
+
+import analytics from "services/analytics";
 
 const withTracker = <P extends RouteComponentProps>(
   WrappedComponent: React.ComponentType<P>,
   options: FieldsObject = {}
 ) => {
   const trackPage = (page: string) => {
-    ReactGA.set({ page, ...options });
-    ReactGA.pageview(page);
+    analytics.set({ page, ...options });
+    analytics.pageview({ path: page });
   };
 
   return (props: P) => {
