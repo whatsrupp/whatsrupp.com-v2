@@ -1,8 +1,11 @@
 import * as analytics from "./index";
 
 describe("analytics index", () => {
-  it("exports the expected analytics functions", () => {
-    expect(analytics.pageview).toBeInstanceOf(Function);
-    expect(analytics.event).toBeInstanceOf(Function);
+  it("exports the expected analytics functions as the default export", () => {
+    expect(analytics.default.pageview).toBeInstanceOf(Function);
+    expect(analytics.default.event).toBeInstanceOf(Function);
+    expect(analytics.default.set).toBeInstanceOf(Function);
+
+    expect(Object.keys(analytics.default)).toHaveLength(3);
   });
 });
