@@ -1,5 +1,5 @@
 import event from "./event";
 import pageview from "./pageview";
 import set from "./set";
-
-export default { event, pageview, set };
+import { categories, actions } from "./constants";
+export default { categories, actions, event, pageview, set };

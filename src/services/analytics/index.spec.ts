@@ -5,7 +5,8 @@ describe("analytics index", () => {
     expect(analytics.default.pageview).toBeInstanceOf(Function);
     expect(analytics.default.event).toBeInstanceOf(Function);
     expect(analytics.default.set).toBeInstanceOf(Function);
-
-    expect(Object.keys(analytics.default)).toHaveLength(3);
+    expect(analytics.default.categories).toBeInstanceOf(Object);
+    expect(analytics.default.actions).toBeInstanceOf(Object);
+    expect(Object.keys(analytics.default)).toHaveLength(5);
   });
 });
