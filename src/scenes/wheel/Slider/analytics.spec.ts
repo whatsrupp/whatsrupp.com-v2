@@ -6,10 +6,11 @@ jest.mock("services/analytics/event");
 
 describe("SliderAnalytics", () => {
   it("fires off an event when the slider is used", () => {
-    slideEvent();
+    slideEvent("testLabel");
     expect(analytics.event).toHaveBeenCalledWith({
       category: analytics.categories.INTERACTIONS,
-      action: analytics.actions.MOVE_SLIDER_INPUT
+      action: analytics.actions.MOVE_SLIDER_INPUT,
+      label: "testLabel"
     });
   });
 });
