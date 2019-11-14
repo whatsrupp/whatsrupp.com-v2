@@ -2,6 +2,9 @@ import React from "react";
 import { render, wait, fireEvent } from "@testing-library/react";
 import Slider from "./Slider";
 import useSliderProps from "./useSliderProps";
+import { slideEvent } from "./analytics";
+jest.mock("./analytics");
+jest.useFakeTimers();
 
 describe("Slider", () => {
   it("passes the contrainsts of the range component into the", async () => {
@@ -40,17 +43,16 @@ describe("Slider", () => {
 });
 
 describe("useSliderProps", () => {
+  const TestComponent = () => {
+    const props = useSliderProps({ label: "Label Text", min: 0, max: 100 });
+    return (
+      <>
+        <div data-testid="output"> {props.value}</div>
+        <Slider {...props} />
+      </>
+    );
+  };
   it("controls the value of a slider", async () => {
-    const TestComponent = () => {
-      const props = useSliderProps({ label: "hi", min: 0, max: 100 });
-      return (
-        <>
-          <div data-testid="output"> {props.value}</div>
-          <Slider {...props} />
-        </>
-      );
-    };
-
     const container = render(<TestComponent />);
 
     let output = container.queryByText("20");
@@ -60,5 +62,18 @@ describe("useSliderProps", () => {
     output = await container.findAllByText("20");
 
     expect(output).toBeDefined();
+  });
+
+  it.only("calls analytics with the label using debounce", async () => {
+    const container = render(<TestComponent />);
+    const sliderInput = await container.findByLabelText("Label Text");
+    fireEvent.change(sliderInput, { target: { value: 1 } });
+    fireEvent.change(sliderInput, { target: { value: 2 } });
+    fireEvent.change(sliderInput, { target: { value: 3 } });
+    fireEvent.change(sliderInput, { target: { value: 4 } });
+    jest.runAllTimers();
+
+    expect(slideEvent).toHaveBeenCalledTimes(1);
+    expect(slideEvent).toHaveBeenLastCalledWith("Label Text");
   });
 });

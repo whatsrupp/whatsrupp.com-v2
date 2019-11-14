@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useState, useRef, useEffect } from "react";
+import { debounce } from "lodash";
+import { slideEvent } from "./analytics";
 type UseSliderProps = {
   label: string;
   min: number;
@@ -8,8 +9,11 @@ type UseSliderProps = {
 
 const useSliderProps = ({ label, min, max }: UseSliderProps) => {
   const [value, setValue] = useState((min + max) / 2);
+  const debouncedAnalytics = useRef(debounce(() => slideEvent(label), 1000));
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedAnalytics.current();
+
     const newValue = parseInt(event.target.value);
     setValue(newValue);
   };
