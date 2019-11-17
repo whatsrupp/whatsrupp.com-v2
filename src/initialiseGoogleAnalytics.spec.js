@@ -14,10 +14,7 @@ describe("initialiseApp", () => {
     const expectedOptions = {
       debug: false
     };
-    expect(ReactGa.initialize).toBeCalledWith(
-      "UA-152269286-1",
-      expectedOptions
-    );
+    expect(ReactGa.initialize).toBeCalledWith("UA-68568211-2", expectedOptions);
   });
 
   it("runs analytics in test mode when not in production", () => {
@@ -26,9 +23,6 @@ describe("initialiseApp", () => {
       debug: true,
       testMode: true
     };
-    expect(ReactGa.initialize).toBeCalledWith(
-      "UA-152269286-1",
-      expectedOptions
-    );
+    expect(ReactGa.initialize).toBeCalledWith("UA-68568211-2", expectedOptions);
   });
 });

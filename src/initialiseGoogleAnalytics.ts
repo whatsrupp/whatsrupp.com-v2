@@ -1,7 +1,7 @@
 import ReactGA from "react-ga";
 
 const initialiseGoogleAnalytics = () => {
-  const publicId = "UA-152269286-1";
+  const publicId = "UA-68568211-2";
 
   const isProduction = process.env.NODE_ENV === "production";
 
