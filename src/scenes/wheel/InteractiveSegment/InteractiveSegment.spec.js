@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import Page from "./index";
+import Page from "./InteractiveSegment";
 
 describe("Full Page Integration Test", () => {
   it("Can control the svg properties with a slider", async () => {
