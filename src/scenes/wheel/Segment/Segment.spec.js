@@ -1,9 +1,9 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import Segment from "./Segment";
 import styled from "@emotion/styled";
 describe("Segment", () => {
-  it.only("can inject a custom component for the path and text", () => {
+  it("can inject a custom component for the path and text", () => {
     const customPath = styled.path`
       background-color: blue;
     `;
@@ -12,12 +12,16 @@ describe("Segment", () => {
     `;
     const container = render(
       <svg>
-        <Segment Text={customText} Path={customPath} text={"test text"} />
+        <Segment
+          TextComponent={customText}
+          PathComponent={customPath}
+          displayText={"test text"}
+        />
       </svg>
     );
 
-    const path = container.getByTestId("segment-path");
-    const text = container.getByTestId("segment-text");
+    const path = container.getByRole("button");
+    const text = container.getByText("test text");
 
     expect(window.getComputedStyle(path)._values["background-color"]).toEqual(
       "blue"
@@ -35,7 +39,7 @@ describe("Segment", () => {
         <Segment />
       </svg>
     );
-    const path = container.getByTestId("segment-path");
+    const path = container.getByRole("button");
     expect(path).toBeDefined();
   });
 
@@ -45,7 +49,7 @@ describe("Segment", () => {
         <Segment />
       </svg>
     );
-    const path = container.getByTestId("segment-path");
+    const path = container.getByRole("button");
     const pathDefinition = path.getAttribute("d");
     expect(pathDefinition).not.toBeNull();
   });
@@ -53,7 +57,7 @@ describe("Segment", () => {
   it("renders the correct text", () => {
     const container = render(
       <svg>
-        <Segment text={"test text"} />
+        <Segment displayText={"test text"} />
       </svg>
     );
     const text = container.getByText("test text");
@@ -67,7 +71,7 @@ describe("Segment", () => {
       sweepAngle: 180,
       outerRadius: 10,
       innerRadius: 0,
-      text: "test text"
+      displayText: "test text"
     };
     const container = render(
       <svg>
@@ -83,6 +87,22 @@ describe("Segment", () => {
     expect(x).toEqual("5");
     expect(y).toEqual("0");
     expect(transformDefinition).toEqual(`rotate(-90 5 0)`);
+  });
+
+  it("calls a callback on click or on keydown for aria compliance", () => {
+    const mockCallback = jest.fn();
+    const container = render(
+      <svg>
+        <Segment onSegmentPress={mockCallback} />
+      </svg>
+    );
+
+    const path = container.getByRole("button");
+    fireEvent.click(path);
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+    fireEvent.focus(path);
+    fireEvent.keyDown(path);
+    expect(mockCallback).toHaveBeenCalledTimes(2);
   });
 
   describe("segment path definitions", () => {
@@ -103,9 +123,7 @@ describe("Segment", () => {
         return s.replace(/\s/g, "");
       };
 
-      const pathDefinition = container
-        .getByTestId("segment-path")
-        .getAttribute("d");
+      const pathDefinition = container.getByRole("button").getAttribute("d");
 
       expect(removeWhitespaces(pathDefinition)).toEqual(
         removeWhitespaces(expectedPathDefinition)

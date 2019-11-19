@@ -18,9 +18,10 @@ type SegmentProps = {
   innerRadius: number;
   angularOffset?: number;
   radialOffset?: number;
-  text?: string;
-  Text?: (props: any) => JSX.Element;
-  Path?: (props: any) => JSX.Element;
+  displayText?: string;
+  TextComponent?: (props: any) => JSX.Element;
+  PathComponent?: (props: any) => JSX.Element;
+  onSegmentPress?: Function;
 };
 
 const inRadians = (degrees: number) => {
@@ -33,15 +34,16 @@ const inDegrees = (radians: number) => {
 
 const Segment = (props: SegmentProps) => {
   const {
-    text = "",
+    displayText = "",
     sweepAngle: sweepAngleDegrees = 180,
     startAngle: startAngleDegrees = 0,
     outerRadius = 10,
     innerRadius = 0,
     angularOffset: angularOffsetDegrees = 0,
     radialOffset = 0,
-    Text = styled.text``,
-    Path = styled.path``
+    TextComponent = styled.text``,
+    PathComponent = styled.path``,
+    onSegmentPress = () => {}
   } = props;
 
   const angularOffset = inRadians(angularOffsetDegrees);
@@ -116,21 +118,34 @@ const Segment = (props: SegmentProps) => {
     L ${point1.x},${point1.y}
     z`;
 
+  const handleInteraction = (
+    event:
+      | React.MouseEvent<SVGPathElement, MouseEvent>
+      | React.KeyboardEvent<SVGPathElement>
+  ): void => {
+    onSegmentPress();
+  };
+
   return (
     <>
-      <Path data-testid="segment-path" d={pathDefinition} />
-      <Text
+      <PathComponent
+        d={pathDefinition}
+        role={"button"}
+        tabIndex={0}
+        onClick={handleInteraction}
+        onKeyDown={handleInteraction}
+      />
+      <TextComponent
         x={centre.x}
         y={centre.y}
         fontSize={5}
         dominantBaseline="middle"
         style={{ userSelect: "none" }}
         textAnchor="middle"
-        data-testid="segment-text"
         transform={`rotate(${textAngle} ${centre.x} ${centre.y})`}
       >
-        {text}
-      </Text>
+        {displayText}
+      </TextComponent>
     </>
   );
 };
