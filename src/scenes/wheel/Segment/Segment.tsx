@@ -122,6 +122,7 @@ const Segment = (props: SegmentProps) => {
     event:
       | React.MouseEvent<SVGPathElement, MouseEvent>
       | React.KeyboardEvent<SVGPathElement>
+      | React.MouseEvent<SVGTextElement, MouseEvent>
   ): void => {
     onSegmentPress();
   };
@@ -142,6 +143,7 @@ const Segment = (props: SegmentProps) => {
         dominantBaseline="middle"
         style={{ userSelect: "none" }}
         textAnchor="middle"
+        onClick={handleInteraction}
         transform={`rotate(${textAngle} ${centre.x} ${centre.y})`}
       >
         {displayText}

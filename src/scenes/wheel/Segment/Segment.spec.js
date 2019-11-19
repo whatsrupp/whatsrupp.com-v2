@@ -93,7 +93,7 @@ describe("Segment", () => {
     const mockCallback = jest.fn();
     const container = render(
       <svg>
-        <Segment onSegmentPress={mockCallback} />
+        <Segment onSegmentPress={mockCallback} displayText={"text"} />
       </svg>
     );
 
@@ -103,6 +103,9 @@ describe("Segment", () => {
     fireEvent.focus(path);
     fireEvent.keyDown(path);
     expect(mockCallback).toHaveBeenCalledTimes(2);
+    const text = container.getByText("text");
+    fireEvent.click(text);
+    expect(mockCallback).toHaveBeenCalledTimes(3);
   });
 
   describe("segment path definitions", () => {
