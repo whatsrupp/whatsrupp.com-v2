@@ -1,8 +1,12 @@
 import React from "react";
 import Segment from "../Segment";
+import useChordPlayer from "./useChordPlayer";
+import * as SC from "./styled";
 type WheelSegment = {
   position: number;
   text: string;
+  key: number;
+  mode: string;
 };
 
 type WheelProps = {
@@ -18,6 +22,8 @@ const Wheel = ({
   innerRadius,
   radialOffset
 }: WheelProps) => {
+  const callback = useChordPlayer();
+
   const numberOfSegments = segmentDefinitions.length;
   const degreesInCircle = 360;
   const sweepAngle = degreesInCircle / numberOfSegments;
@@ -30,11 +36,19 @@ const Wheel = ({
         startAngle: sweepAngle * segment.position,
         outerRadius,
         innerRadius,
-        text: segment.text,
+        displayText: segment.text,
         radialOffset,
-        angularOffset: offsetAngleForCentralisation
+        angularOffset: offsetAngleForCentralisation,
+        onSegmentPress: callback(segment.key, segment.mode)
       };
-      return <Segment key={segment.text} {...segmentProps} />;
+      return (
+        <Segment
+          key={segment.text}
+          PathComponent={SC.Path}
+          TextComponent={SC.Text}
+          {...segmentProps}
+        />
+      );
     });
   };
 
