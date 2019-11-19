@@ -1,5 +1,5 @@
 import React from "react";
-import { render, wait, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import Slider from "./Slider";
 import useSliderProps from "./useSliderProps";
 import { slideEvent } from "./analytics";
@@ -64,16 +64,17 @@ describe("useSliderProps", () => {
     expect(output).toBeDefined();
   });
 
-  it.only("calls analytics with the label using debounce", async () => {
+  it("calls analytics with the label using debounce", async () => {
     const container = render(<TestComponent />);
     const sliderInput = await container.findByLabelText("Label Text");
     fireEvent.change(sliderInput, { target: { value: 1 } });
     fireEvent.change(sliderInput, { target: { value: 2 } });
     fireEvent.change(sliderInput, { target: { value: 3 } });
     fireEvent.change(sliderInput, { target: { value: 4 } });
-    jest.runAllTimers();
-
-    expect(slideEvent).toHaveBeenCalledTimes(1);
-    expect(slideEvent).toHaveBeenLastCalledWith("Label Text");
+    jest.runTimersToTime(2000);
+    setTimeout(() => {
+      expect(slideEvent).toHaveBeenCalledTimes(1);
+      expect(slideEvent).toHaveBeenLastCalledWith("Label Text");
+    }, 2000);
   });
 });
