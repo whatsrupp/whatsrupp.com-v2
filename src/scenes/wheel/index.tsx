@@ -1,3 +1,4 @@
 import InteractiveSegment from "./InteractiveSegment";
-
-export default InteractiveSegment;
+import Camelot from "./Camelot";
+export default Camelot;
+// export default InteractiveSegment;
