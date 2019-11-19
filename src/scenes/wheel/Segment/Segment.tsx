@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "@emotion/styled";
 
 type CartesianCoordinates = {
   x: number;
@@ -10,25 +11,17 @@ type PolarCoordinates = {
   theta: number;
 };
 
-interface ISegmentProperties {
-  text: string;
-}
-
-interface ISegmentConstraints {
+type SegmentProps = {
   sweepAngle: number;
   startAngle: number;
   outerRadius: number;
   innerRadius: number;
-}
-
-interface ISegmentTransforms {
-  angularOffset: number;
-  radialOffset: number;
-}
-
-type SegmentProps = ISegmentConstraints &
-  ISegmentProperties &
-  ISegmentTransforms;
+  angularOffset?: number;
+  radialOffset?: number;
+  text?: string;
+  Text?: (props: any) => JSX.Element;
+  Path?: (props: any) => JSX.Element;
+};
 
 const inRadians = (degrees: number) => {
   return (degrees * Math.PI) / 180;
@@ -46,7 +39,9 @@ const Segment = (props: SegmentProps) => {
     outerRadius = 10,
     innerRadius = 0,
     angularOffset: angularOffsetDegrees = 0,
-    radialOffset = 0
+    radialOffset = 0,
+    Text = styled.text``,
+    Path = styled.path``
   } = props;
 
   const angularOffset = inRadians(angularOffsetDegrees);
@@ -123,18 +118,19 @@ const Segment = (props: SegmentProps) => {
 
   return (
     <>
-      <path data-testid="segment-path" d={pathDefinition} />
-      <text
+      <Path data-testid="segment-path" d={pathDefinition} />
+      <Text
         x={centre.x}
         y={centre.y}
         fontSize={5}
         dominantBaseline="middle"
         style={{ userSelect: "none" }}
         textAnchor="middle"
+        data-testid="segment-text"
         transform={`rotate(${textAngle} ${centre.x} ${centre.y})`}
       >
         {text}
-      </text>
+      </Text>
     </>
   );
 };

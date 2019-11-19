@@ -1,8 +1,34 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import Segment from "./Segment";
-
+import styled from "@emotion/styled";
 describe("Segment", () => {
+  it.only("can inject a custom component for the path and text", () => {
+    const customPath = styled.path`
+      background-color: blue;
+    `;
+    const customText = styled.text`
+      background-color: blue;
+    `;
+    const container = render(
+      <svg>
+        <Segment Text={customText} Path={customPath} text={"test text"} />
+      </svg>
+    );
+
+    const path = container.getByTestId("segment-path");
+    const text = container.getByTestId("segment-text");
+
+    expect(window.getComputedStyle(path)._values["background-color"]).toEqual(
+      "blue"
+    );
+    expect(window.getComputedStyle(text)._values["background-color"]).toEqual(
+      "blue"
+    );
+
+    expect(path).toBeDefined();
+  });
+
   it("renders a path", () => {
     const container = render(
       <svg>
