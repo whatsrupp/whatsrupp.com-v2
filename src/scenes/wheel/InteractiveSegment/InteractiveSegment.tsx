@@ -44,7 +44,7 @@ const Wheel: React.FC = () => {
             innerRadius={innerRadius.value}
             angularOffset={angularOffset.value}
             radialOffset={0}
-            text={""}
+            displayText={""}
           />
         </SC.SegmentSvg>
 

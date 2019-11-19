@@ -23,9 +23,7 @@ describe("Full Page Integration Test", () => {
     const innerRadius = await container.findByLabelText("Inner Radius");
     const angularOffset = await container.findByLabelText("Angular Offset");
 
-    let pathDefinition = await container
-      .getByTestId("segment-path")
-      .getAttribute("d");
+    let pathDefinition = await container.getByRole("button").getAttribute("d");
 
     const expectedDefaultPathDefinition =
       "M-0.4363,49.9981A50,50,0,0,0,0.8726,-49.9924L0.7854,-44.9931A45,45,0,0,1,-0.3927,44.9983L-0.4363,49.9981z";
@@ -38,9 +36,7 @@ describe("Full Page Integration Test", () => {
     adjustRangeInputToValue(innerRadius, 10);
     adjustRangeInputToValue(angularOffset, 90);
 
-    pathDefinition = await container
-      .getByTestId("segment-path")
-      .getAttribute("d");
+    pathDefinition = await container.getByRole("button").getAttribute("d");
 
     const expectedPathDefinition =
       "M20,0 A20,20,0,0,0,-20,0 L-10,0 A10,10,0,0,1,10,0 L20,0 z";
