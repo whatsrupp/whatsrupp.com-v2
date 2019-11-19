@@ -156,7 +156,7 @@ describe("Segment", () => {
       };
 
       expectedPathDefinition =
-        "M0,20 A10,10,0,0,0,0,-20 L0,-15 A5,5,0,0,1,0,15 L0,20 z";
+        "M20,20 A10,10,0,0,0,20,-20 L20,-15 A5,5,0,0,1,20,15 L20,20 z";
     });
 
     it("can add a rotation offset", () => {

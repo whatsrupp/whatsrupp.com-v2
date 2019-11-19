@@ -51,14 +51,14 @@ const Segment = (props: SegmentProps) => {
 
   const angularOffset = inRadians(angularOffsetDegrees);
   const sweepAngle = inRadians(sweepAngleDegrees);
-  const startAngle = inRadians(startAngleDegrees);
-  const centreAngle = (sweepAngle - startAngle) / 2;
+  const startAngle = inRadians(startAngleDegrees) + angularOffset;
+  const centreAngle = startAngle + sweepAngle / 2;
   const textAngle = inDegrees(-centreAngle);
 
   const endAngle = startAngle + sweepAngle;
   const r = innerRadius;
   const R = outerRadius;
-  const centreRadius = r + (R - r) / 2;
+  const centreRadius = R - (R - r) / 2;
   const isBigArc = sweepAngleDegrees > 180;
   const bigArcValue = isBigArc ? 1 : 0;
 
@@ -75,22 +75,43 @@ const Segment = (props: SegmentProps) => {
     polarCoordinates: PolarCoordinates
   ): CartesianCoordinates => {
     const { r, theta } = polarCoordinates;
-    const x = (r + radialOffset) * Math.sin(theta + angularOffset);
-    const y = (r + radialOffset) * Math.cos(theta + angularOffset);
+    const x = (r + radialOffset) * Math.sin(theta);
+    const y = (r + radialOffset) * Math.cos(theta);
     return { x: parseFloat(x.toFixed(4)), y: parseFloat(y.toFixed(4)) };
   };
 
-  const point1 = inCartesianCoordinates({
-    r: R,
-    theta: startAngle
-  });
-  const point2 = inCartesianCoordinates({ r: R, theta: endAngle });
-  const point3 = inCartesianCoordinates({ r, theta: endAngle });
-  const point4 = inCartesianCoordinates({ r, theta: startAngle });
-  const centre = inCartesianCoordinates({
-    r: centreRadius,
-    theta: centreAngle
-  });
+  const withRadialOffset = (coordinates: CartesianCoordinates) => {
+    const radialOffsetVector = inCartesianCoordinates({
+      r: radialOffset,
+      theta: centreAngle
+    });
+    return {
+      x: coordinates.x + radialOffsetVector.x,
+      y: coordinates.y + radialOffsetVector.y
+    };
+  };
+
+  const point1 = withRadialOffset(
+    inCartesianCoordinates({
+      r: R,
+      theta: startAngle
+    })
+  );
+  const point2 = withRadialOffset(
+    inCartesianCoordinates({ r: R, theta: endAngle })
+  );
+  const point3 = withRadialOffset(
+    inCartesianCoordinates({ r, theta: endAngle })
+  );
+  const point4 = withRadialOffset(
+    inCartesianCoordinates({ r, theta: startAngle })
+  );
+  const centre = withRadialOffset(
+    inCartesianCoordinates({
+      r: centreRadius,
+      theta: centreAngle
+    })
+  );
 
   const pathDefinition = `
     M ${point1.x},${point1.y}
