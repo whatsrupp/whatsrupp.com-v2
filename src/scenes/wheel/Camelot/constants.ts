@@ -18,6 +18,26 @@ export const KEYS = {
   B: 11
 };
 
+export const DISPLAY = {
+  [KEYS.C]: "C",
+  [KEYS.Cs]: "C♯",
+  [KEYS.Db]: "D♭",
+  [KEYS.D]: "D",
+  [KEYS.Ds]: "D♯",
+  [KEYS.Eb]: "E♭",
+  [KEYS.E]: "E",
+  [KEYS.F]: "F",
+  [KEYS.Fs]: "F♯",
+  [KEYS.Gb]: "G♭",
+  [KEYS.G]: "G",
+  [KEYS.Gs]: "G♯",
+  [KEYS.Ab]: "A♭",
+  [KEYS.A]: "A",
+  [KEYS.As]: "A♯",
+  [KEYS.Bb]: "B♭",
+  [KEYS.B]: "B"
+};
+
 export enum KeysEnum {
   C = 0,
   Cs = 1,
