@@ -1,19 +1,19 @@
 import { getChordFrequencies } from "./musicHelpers";
 type PlayChordArgs = {
-  stagger: number;
   key: number;
   mode: string;
   context: AudioContext;
 };
 
-const playChord = ({ stagger, key, mode, context }: PlayChordArgs) => {
+const playChord = ({ key, mode, context }: PlayChordArgs) => {
   const frequencies = getChordFrequencies(key, 4, mode);
   const currentTime = context.currentTime;
+  const stagger = 0.2;
   frequencies.forEach((frequency, i) => {
     let oscillator = context.createOscillator();
     oscillator.frequency.value = frequency;
     const startTime = currentTime + i * stagger;
-    const stopTime = currentTime + 1;
+    const stopTime = currentTime + (i + 1) * stagger;
     oscillator.start(startTime);
     oscillator.stop(stopTime);
     oscillator.connect(context.destination);

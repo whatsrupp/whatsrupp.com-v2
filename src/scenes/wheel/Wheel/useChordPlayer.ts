@@ -16,7 +16,7 @@ export const useChordPlayer = () => {
   const constructChordPlayCallback = (key: any, mode: string): Function => {
     const callback = () => {
       segmentClickEvent(key, mode);
-      playChord({ key, mode, stagger: 0.05, context: getAudioContext() });
+      playChord({ key, mode, context: getAudioContext() });
     };
     return callback;
   };

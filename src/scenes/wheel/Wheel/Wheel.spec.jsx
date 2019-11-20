@@ -87,7 +87,6 @@ describe("Wheel", () => {
     expect(playChord).toHaveBeenCalledWith({
       key: KEYS.A,
       mode: MODES.major,
-      stagger: 0.05,
       context: {}
     });
   });
