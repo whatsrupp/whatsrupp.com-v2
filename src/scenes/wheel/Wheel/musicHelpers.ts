@@ -1,4 +1,4 @@
-import { MODES, ModesEnum, KeysEnum } from "../Camelot/constants";
+import { MODES, KeysEnum } from "../Camelot/constants";
 
 const getSemiTonesAwayFromA0 = (key: KeysEnum, octave: number) => {
   const note = key - 9;
