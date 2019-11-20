@@ -8,11 +8,11 @@ import Soundboard from "./scenes/soundboard/Soundboard";
 import Landing from "./scenes/landing/Landing";
 import Loops from "./scenes/loops/Loops";
 import LandGrid from "./scenes/landGrid";
-import Wheel from "./scenes/wheel";
 
 import { Global } from "@emotion/core";
 
 import globalStyles from "./style/global";
+import Wheel from "scenes/wheel";
 
 const App: React.FC = () => {
   return (
@@ -24,7 +24,12 @@ const App: React.FC = () => {
         <Route path="/soundboard" exact component={withTracker(Soundboard)} />
         <Route path="/loops" exact component={withTracker(Loops)} />
         <Route path="/land-grid" exact component={withTracker(LandGrid)} />
-        <Route path="/wheel" exact component={withTracker(Wheel)} />
+        <Route
+          path="/camelot-wheel"
+          exact
+          component={withTracker(Wheel.Camelot)}
+        />
+        <Route path="/segment" exact component={withTracker(Wheel.Segment)} />
       </Router>
     </div>
   );
