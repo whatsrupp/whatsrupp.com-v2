@@ -6,7 +6,8 @@ import NathanFace from "./assets/images/NathanFace.png";
 import LoopsLogo from "./assets/images/LoopsLogo.png";
 import ReactPageScroller from "react-page-scroller";
 import LandGridLogo from "../landGrid/Logo";
-import ColourWheelIcon from "../wheel/assets/Logo";
+import CamelotWheelIcon from "../wheel/assets/CamelotWheelLogo";
+import SegmentIcon from "../wheel/assets/SegmentLogo";
 
 type RowProps = {
   RowComponent: any;
@@ -89,10 +90,18 @@ const Landing: React.FC = () => {
 
         <Row
           RowComponent={SC.WheelRow}
-          link={"/wheel"}
-          IconComponent={ColourWheelIcon}
+          link={"/camelot-wheel"}
+          IconComponent={CamelotWheelIcon}
           header={"Camelot Wheel"}
           text={"An animated svg"}
+        />
+
+        <Row
+          RowComponent={SC.SegmentRow}
+          link={"/segment"}
+          IconComponent={SegmentIcon}
+          header={"Segment"}
+          text={"A lightweight radial SVG builder"}
         />
       </ReactPageScroller>
     </SC.PageLayout>

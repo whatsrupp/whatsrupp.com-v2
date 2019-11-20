@@ -93,6 +93,11 @@ export const WheelRow = styled(Row)`
   background: -webkit-linear-gradient(to right, #5d26c1, #a17fe0, #59c173);
   background: linear-gradient(to right, #5d26c1, #a17fe0, #59c173);
 `;
+export const SegmentRow = styled(Row)`
+  background: #5d4157;
+  background: -webkit-linear-gradient(to right, #a8caba, #5d4157);
+  background: linear-gradient(to right, #a8caba, #5d4157);
+`;
 
 export const RowPicture = styled.img`
   height: 100px;
