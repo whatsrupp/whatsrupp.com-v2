@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { getChordFrequencies } from "./musicHelpers";
-
+import { segmentClickEvent } from "./analytics";
 export const useChordPlayer = () => {
   const [audioContext, setAudioContext] = useState(null);
 
   const constructChordPlayCallback = (key: any, mode: string): Function => {
     const callback = () => {
+      segmentClickEvent(key, mode);
       let currentAudioContext = audioContext;
       if (!currentAudioContext) {
         currentAudioContext = new AudioContext();
