@@ -1,3 +1,5 @@
+jest.mock("react-ga");
+
 expect.extend({
   toHavePathDefinition: (pathElement, expectedPathDefinition) => {
     const removeWhitespaces = s => {
