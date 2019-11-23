@@ -5,12 +5,13 @@ import Segment from "../Segment";
 import { Slider, useSliderProps } from "../Slider";
 
 const Wheel: React.FC = () => {
+  const outerRadiusMax = 100;
   const sweep = useSliderProps({ label: "Sweep", min: 0, max: 359 });
   const startAngle = useSliderProps({ label: "Start Angle", min: 0, max: 359 });
   const outerRadius = useSliderProps({
     label: "Outer Radius",
     min: 0,
-    max: 100
+    max: outerRadiusMax
   });
   const innerRadius = useSliderProps({
     label: "Inner Radius",
@@ -23,7 +24,7 @@ const Wheel: React.FC = () => {
     max: 360
   });
 
-  const canvasWidth = Math.max(innerRadius.value, outerRadius.value) * 2 + 5;
+  const canvasWidth = outerRadiusMax * 2 + 10;
   const canvasHeight = canvasWidth;
 
   return (
@@ -32,8 +33,6 @@ const Wheel: React.FC = () => {
 
       <SC.Body>
         <SC.SegmentSvg
-          height={500}
-          width={500}
           viewBox={`${-canvasWidth / 2} ${-canvasHeight /
             2} ${canvasWidth} ${canvasHeight}`}
         >
