@@ -1,11 +1,15 @@
 import React from "react";
 
-const BackIcon = () => {
+type BackIconProps = {
+  className?: string;
+};
+const BackIcon = ({ className }: BackIconProps) => {
   return (
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 219.151 219.151"
+      className={className}
     >
       <path
         d="M109.576,219.151c60.419,0,109.573-49.156,109.573-109.576C219.149,49.156,169.995,0,109.576,0S0.002,49.156,0.002,109.575
