@@ -1838,6 +1838,11 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.147.tgz#8ca5cfa9c67753dcb73e507d1bbf1c4f8ba6f029"
   integrity sha512-+0zY1Axql6ru5T85Rh6aR6Zr0xT7c0USLqsHv01b3ID//dOrV3OvpXJGjm69+4QpxoZ0oMNEfmW1ltwXe2WVzQ==
 
+"@types/matter-js@^0.14.5":
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/@types/matter-js/-/matter-js-0.14.5.tgz#3093bfc4496599b1f4cc99e5c8b30feeafc675a1"
+  integrity sha512-WAGhTov24lyLzb53jwGtyeP4o9kCn3Vz5qs1Mciffc2+lYP12dbLgfZ3b0Z69sy30etV4+vCyXcU4wvCt9R6kw==
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -8390,6 +8395,11 @@ mathml-tag-names@^2.0.1, mathml-tag-names@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/mathml-tag-names/-/mathml-tag-names-2.1.1.tgz#6dff66c99d55ecf739ca53c492e626f1d12a33cc"
   integrity sha512-pWB896KPGSGkp1XtyzRBftpTzwSOL0Gfk0wLvxt4f2mgzjY19o0LxJ3U25vNWTzsh7da+KTbuXQoQ3lOJZ8WHw==
+
+matter-js@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/matter-js/-/matter-js-0.14.2.tgz#8169af9e06fdc356ba9e72b49624eb329839883b"
+  integrity sha512-3ttVT8cJlQnGRjBa8MyVrGyvGmnmOkZ3YsyemIw+KwEEdVi70mo32FH1Eta2b3GfdDJFbMDRqyMQt4heNKBUEA==
 
 md5.js@^1.3.4:
   version "1.3.5"
