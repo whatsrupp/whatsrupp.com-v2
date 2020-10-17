@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -8,18 +9,19 @@ import Soundboard from "./scenes/soundboard/Soundboard";
 import Landing from "./scenes/landing/Landing";
 import Loops from "./scenes/loops/Loops";
 import LandGrid from "./scenes/landGrid";
+import Cover from "./scenes/masonry/Masonry";
 
 import { Global } from "@emotion/core";
 import * as routes from "./routes";
 import globalStyles from "./style/global";
 import Wheel from "scenes/wheel";
-
+import Demolition from "scenes/demolition/Demolition";
 const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
         <Global styles={globalStyles} />
-        <Route path={routes.HOME} exact component={withTracker(Landing)} />
+        <Route path={routes.HOME} exact component={withTracker(Demolition)} />
         <Route
           path={routes.PORTFOLIO}
           exact
