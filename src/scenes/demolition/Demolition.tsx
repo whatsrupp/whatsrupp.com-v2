@@ -1,62 +1,64 @@
 import React, { useRef, useEffect, useState } from "react";
 import Matter from "matter-js";
-import NathanFace from "./NathanFace.png";
-import LoopsAndCats from "./LoopsLogo.png";
-import HarryFace from "./HarryCutout.png";
+
 import * as SC from "./styled";
-import Jinko from "./Jinko.png";
 import useWindowDimensions from "./useWindowDimensions";
+
+import icons from "./icons";
 
 const Demolition: React.FC = () => {
   const containerRef = useRef(null);
   const [label, setLabel] = useState("");
   const { height, width } = useWindowDimensions();
 
+  var Engine = Matter.Engine,
+    Render = Matter.Render,
+    World = Matter.World,
+    Bodies = Matter.Bodies,
+    Mouse = Matter.Mouse,
+    MouseConstraint = Matter.MouseConstraint;
+
   console.log(label);
   useEffect(() => {
     if (!containerRef) return;
-
-    var Engine = Matter.Engine,
-      Render = Matter.Render,
-      World = Matter.World,
-      Bodies = Matter.Bodies,
-      Mouse = Matter.Mouse,
-      MouseConstraint = Matter.MouseConstraint;
 
     var engine = Engine.create({
       positionIterations: 20
     });
 
-    console.log(containerRef);
+    function createBall(icon: string) {
+      const radius = width / 20;
+      const spriteRadius = 100;
+      const spriteScale = radius / spriteRadius;
+      const ball = Bodies.circle(210, 100, radius, {
+        render: {
+          sprite: { xScale: spriteScale, yScale: spriteScale, texture: icon }
+        },
+        restitution: 0.5,
+        label: icon
+      });
+      return ball;
+    }
 
-    // const width = 1000;
-    // const height = 1000;
+    console.log(containerRef);
 
     var render = Render.create({
       canvas: containerRef.current,
       engine: engine,
       options: {
-        background: Jinko,
+        background: "transparent",
         wireframes: false,
         width,
         height
       }
     });
 
-    var ballA = Bodies.circle(210, 100, 100, {
-      render: {
-        sprite: { xScale: 0.2, yScale: 0.2, texture: NathanFace }
-      },
-      restitution: 0.5
+    const balls = Object.keys(icons).map(iconName => {
+      const test: { [key: string]: string } = icons;
+      return createBall(test[iconName]);
     });
-    ballA.label = "yo";
 
-    var ballc = Bodies.circle(210, 100, 100, {
-      render: {
-        sprite: { xScale: 0.3, yScale: 0.3, texture: HarryFace }
-      },
-      restitution: 0.5
-    });
+    World.add(engine.world, balls);
 
     function wall(x: number, y: number, w: number, h: number) {
       return Bodies.rectangle(x, y, w, h, {
@@ -76,8 +78,6 @@ const Demolition: React.FC = () => {
       wall(width - t / 2, height / 2, t, height)
     ]);
 
-    World.add(engine.world, [ballA, ballc]);
-
     var mouse = Mouse.create(render.canvas),
       mouseConstraint = MouseConstraint.create(engine, {
         mouse: mouse
@@ -93,14 +93,18 @@ const Demolition: React.FC = () => {
     render.mouse = mouse;
     Engine.run(engine);
 
-    //@ts-ignore
-    // Render.lookAt(render, {
-    //   min: { x: 0, y: 0 },
-    //   max: { x: 800, y: 600 }
-    // });
     Render.run(render);
-    // Render.setPixelRatio(render, 2);
-  }, [containerRef, height, width]);
+  }, [
+    Bodies,
+    Engine,
+    Mouse,
+    MouseConstraint,
+    Render,
+    World,
+    containerRef,
+    height,
+    width
+  ]);
 
   return (
     <SC.PageLayout>
