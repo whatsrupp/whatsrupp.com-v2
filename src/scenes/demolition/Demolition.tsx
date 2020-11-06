@@ -27,9 +27,14 @@ const Demolition: React.FC = () => {
     });
 
     function createBall(icon: string) {
-      const radius = width / 20;
-      const spriteRadius = 100;
-      const spriteScale = radius / spriteRadius;
+      const minPixelRadius = 44; //guidelines for smallest button on phones
+      const calculatedPixelRadius = width / 20;
+      const radius =
+        calculatedPixelRadius < minPixelRadius
+          ? minPixelRadius
+          : calculatedPixelRadius;
+      const spritePixelRadius = 100; //the pixel width of the sprites made in photoshop
+      const spriteScale = radius / spritePixelRadius;
       const ball = Bodies.circle(width / 2, height / 2, radius, {
         render: {
           sprite: { xScale: spriteScale, yScale: spriteScale, texture: icon }
@@ -68,7 +73,7 @@ const Demolition: React.FC = () => {
       });
     }
 
-    const t = 100;
+    const t = 200;
     World.add(engine.world, [
       // x, y, width, height
       wall(width / 2, t / 2 - t, width, t), // top
@@ -108,6 +113,8 @@ const Demolition: React.FC = () => {
 
   return (
     <SC.PageLayout>
+      <SC.NeonText>Nick Rupp's Project Pit</SC.NeonText>
+      <SC.SubHeading>Throw 'em around, I don't care</SC.SubHeading>
       <SC.Canvas ref={containerRef} />
     </SC.PageLayout>
   );
