@@ -30,17 +30,18 @@ const Demolition: React.FC = () => {
       const radius = width / 20;
       const spriteRadius = 100;
       const spriteScale = radius / spriteRadius;
-      const ball = Bodies.circle(210, 100, radius, {
+      const ball = Bodies.circle(width / 2, height / 2, radius, {
         render: {
           sprite: { xScale: spriteScale, yScale: spriteScale, texture: icon }
         },
         restitution: 0.5,
         label: icon
       });
+
+      World.add(engine.world, ball);
+
       return ball;
     }
-
-    console.log(containerRef);
 
     var render = Render.create({
       canvas: containerRef.current,
@@ -58,8 +59,6 @@ const Demolition: React.FC = () => {
       return createBall(test[iconName]);
     });
 
-    World.add(engine.world, balls);
-
     function wall(x: number, y: number, w: number, h: number) {
       return Bodies.rectangle(x, y, w, h, {
         isStatic: true,
@@ -69,13 +68,13 @@ const Demolition: React.FC = () => {
       });
     }
 
-    const t = 50;
+    const t = 100;
     World.add(engine.world, [
       // x, y, width, height
-      wall(width / 2, t / 2, width, t),
-      wall(width / 2, height - t / 2, width, t),
-      wall(t / 2, height / 2, t, height),
-      wall(width - t / 2, height / 2, t, height)
+      wall(width / 2, t / 2 - t, width, t), // top
+      wall(width / 2, height + t / 2, width, t), // bottom
+      wall(-t / 2, height / 2, t, height), // left
+      wall(width + t / 2, height / 2, t, height) //right
     ]);
 
     var mouse = Mouse.create(render.canvas),
@@ -87,6 +86,7 @@ const Demolition: React.FC = () => {
       console.log(event.body);
       setLabel(event.body.label);
     });
+
     World.add(engine.world, mouseConstraint);
 
     //@ts-ignore
