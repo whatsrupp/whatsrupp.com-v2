@@ -22,6 +22,31 @@ const randomTextShadow = () => {
   `;
 };
 
+const neonTextColour = "#f40";
+
+export const NeonText = styled.h1`
+  font-family: "Syne Mono", monospace;
+  color: white;
+  position: fixed;
+  font-size: 3rem;
+  top: 1rem;
+  left: 1rem;
+  margin: 0;
+  color: #fff;
+  user-select: none;
+  text-transform: uppercase;
+  text-shadow: -0.2rem -0.2rem 1rem #fff, 0.2rem 0.2rem 1rem #fff,
+    0 0 2rem ${neonTextColour}, 0 0 4rem ${neonTextColour},
+    0 0 6rem ${neonTextColour}, 0 0 8rem ${neonTextColour},
+    0 0 10rem ${neonTextColour};
+`;
+
+export const SubHeading = styled(NeonText)`
+  font-size: 1rem;
+  top: 5rem;
+  font-style: italic;
+`;
+
 export const PageLayout = styled(PageLayoutComponent)`
   background: ${colours.purple};
   display: flex;
