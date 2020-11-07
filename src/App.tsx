@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -13,13 +14,18 @@ import { Global } from "@emotion/core";
 import * as routes from "./routes";
 import globalStyles from "./style/global";
 import Wheel from "scenes/wheel";
-
+import Demolition from "scenes/demolition/Demolition";
 const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
         <Global styles={globalStyles} />
-        <Route path={routes.HOME} exact component={withTracker(Landing)} />
+        <Route path={routes.HOME} exact component={withTracker(Demolition)} />
+        <Route
+          path={routes.PORTFOLIO_TWO}
+          exact
+          component={withTracker(Landing)}
+        />
         <Route
           path={routes.PORTFOLIO}
           exact

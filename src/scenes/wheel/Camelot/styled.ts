@@ -11,12 +11,15 @@ export const PageLayout = styled(PageLayoutComponent)`
 
 export const Header = styled.div``;
 export const Body = styled.div`
-  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 75vw;
+  max-width: 800px;
 `;
 export const Footer = styled.div``;
 
-export const SegmentSvg = styled.svg``;
+export const SegmentSvg = styled.svg`
+  width: 100%;
+`;
