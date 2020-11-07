@@ -140,6 +140,7 @@ export const InfoPanel = styled(InfoPanelBase)`
 export const InfoPanelIcon = styled.img`
   grid-area: icon;
   width: 80%;
+  padding: 10px;
   max-width: 100px;
   align-self: center;
   justify-self: center;
@@ -152,7 +153,7 @@ export const InfoPanelHeading = styled.h1`
   font-size: 1rem;
   height: fit-content;
   line-height: 1;
-  user-select: none;
+  /* user-select: none; */
   justify-self: left;
   color: white;
   align-self: center;
@@ -161,7 +162,7 @@ export const InfoPanelHeading = styled.h1`
 export const InfoPanelSubheading = styled.h2`
   grid-area: subheading;
   text-align: left;
-  user-select: none;
+  /* user-select: none; */
   height: fit-content;
   font-size: 0.8rem;
   justify-self: left;
@@ -173,4 +174,26 @@ export const InfoPanelButton = styled.button`
   grid-area: button;
   font-size: 1rem;
   user-select: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    background-color: #2ee59d;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
 `;
