@@ -1,10 +1,12 @@
 import icons from "./icons";
+import * as routes from "../../routes";
 
 export type Project = {
   id: string;
   icon: string;
   title: string;
   subtitle: string;
+  link: string;
   description: string;
 };
 
@@ -18,7 +20,8 @@ export const projectIds = {
   engineering: "engineering",
   writing: "writing",
   photography: "photography",
-  about: "about"
+  about: "about",
+  coding: "coding"
 };
 
 const projects = [
@@ -26,6 +29,7 @@ const projects = [
     id: projectIds.soundboard,
     icon: icons.nathan,
     title: "King Soundboard",
+    link: routes.SOUNDBOARD,
     subtitle: "A soundboard made to annoy my housemate",
     description: `The year was 2018, the airport was London Gatwick. Some uni friends and I had just been told about a 4 hour delay. Luckily, I had VS Code to hand and used the time to whip up a small soundboard of my friend's common expressions. The annoyance it has created over the last few years has been sensational.`
   },
@@ -33,6 +37,8 @@ const projects = [
     id: projectIds.grid,
     icon: icons.grid,
     title: "Land Grid",
+    link: routes.LAND_GRID,
+
     subtitle:
       "An interactive chart to display the location and relative pricing of houses",
     description:
@@ -41,14 +47,28 @@ const projects = [
   {
     id: projectIds.portfolio,
     icon: icons.drawing,
+    link: routes.PORTFOLIO,
+
     title: "whatsrupp.com v1.0.0",
     subtitle: "My first design for a portfolio back in 2017",
     description:
       "I took a year out in the middle of my degree. I did a number of odd jobs while learning how to code. In March 2017 I took the plunge and did a 3 months coding course. It was amazing. I decided this could be something I'd love to start a career in. I had 6 months before I went back to uni and I was desperately trying to find a summer job. I remember grinding out this website as fast as possible and finding it really difficult at the time. I eventually found a small start up that were willing to take a chance with my limited skills. I will be forever grateful that they did. I ended up working with them throughout the final year of university and the year afterwards. I really enjoyed putting in some subtle animations and hiding a small easter egg on the page. I also remember enjoying making all the logos in Adobe Illustrator, I was obsessed with making all the icons using the Golden ratio principle. "
   },
   {
+    id: projectIds.coding,
+    icon: icons.coding,
+    link: "https://github.com/whatsrupp",
+    title: "Coding",
+    subtitle:
+      "A link to my github if you want to look at the source code for this website! Steal Away!",
+    description:
+      "Over the years most of my weird coding side projects have ended up on github, it's a good place to have a snoop. I've also got my cv on there if you're interested."
+  },
+  {
     id: projectIds.loops,
     icon: icons.loops,
+    link: routes.LOOPS,
+
     title: "Loops and Cats",
     subtitle: "A live looping recording station",
     description:
@@ -57,6 +77,8 @@ const projects = [
   {
     id: projectIds.wheel,
     icon: icons.wheel,
+    link: routes.CAMELOT_WHEEL,
+
     title: "Camelot Wheel",
     subtitle: "A musical SVG",
     description:
@@ -65,6 +87,8 @@ const projects = [
   {
     id: projectIds.segment,
     icon: icons.segment,
+    link: routes.SEGMENT,
+
     title: "Segment",
     subtitle: "A radial SVG builder for react",
     description:
@@ -73,6 +97,8 @@ const projects = [
   {
     id: projectIds.engineering,
     icon: icons.wrench,
+    link: routes.SOUNDBOARD,
+
     title: "Engineering",
     subtitle: "A collection of more technical mechanical engineering projects",
     description:
@@ -81,6 +107,8 @@ const projects = [
   {
     id: projectIds.writing,
     icon: icons.writing,
+    link: routes.SOUNDBOARD,
+
     title: "Engineering Blog",
     subtitle:
       "Man Vs. Code a blog about what it's like to do a coding bootcamp",
@@ -90,6 +118,8 @@ const projects = [
   {
     id: projectIds.photography,
     icon: icons.photography,
+    link: routes.SOUNDBOARD,
+
     title: "Nick Pics",
     subtitle: "Night time and Nature",
     description:
@@ -98,6 +128,8 @@ const projects = [
   {
     id: projectIds.about,
     icon: icons.mannequin,
+    link: routes.SOUNDBOARD,
+
     title: "About Me",
     subtitle: "Proceed with caution.",
     description:

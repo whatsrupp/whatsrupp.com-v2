@@ -114,7 +114,7 @@ const Demolition: React.FC = () => {
   const currentProject = projectsMap.get(currentProjectId);
   const ProjectInfo = () => {
     return (
-      <SC.InfoPanel>
+      <SC.InfoPanel to={currentProject.link}>
         <SC.InfoPanelIcon
           alt={`${currentProject.id} icon`}
           src={currentProject.icon}
@@ -123,7 +123,7 @@ const Demolition: React.FC = () => {
         <SC.InfoPanelSubheading>
           {currentProject.subtitle}
         </SC.InfoPanelSubheading>
-        <SC.InfoPanelButton>Show Me More</SC.InfoPanelButton>
+        <SC.InfoPanelButton>></SC.InfoPanelButton>
       </SC.InfoPanel>
     );
   };
@@ -132,8 +132,12 @@ const Demolition: React.FC = () => {
     return (
       <SC.InfoPanelSkeleton>
         <SC.InfoPanelHeading>
-          These are my projects, whack, poke or haul them around with your mouse
-          or finger!
+          Hi, I'm Nick! I'm a developer! These are my portfolio projects. Whack,
+          poke or haul them around with your mouse or finger! Stay zesty, Love
+          Nick{" "}
+          <span aria-label="orange emoji" role="img">
+            🍊
+          </span>
         </SC.InfoPanelHeading>
       </SC.InfoPanelSkeleton>
     );

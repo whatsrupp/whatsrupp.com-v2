@@ -2,11 +2,12 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/core";
 import PageLayoutComponent from "../../style/components/PageLayout";
 import * as colours from "../../style/colours";
+import { Link } from "react-router-dom";
 
 const randomTextShadow = () => {
   let i;
   let textShadow = ``;
-  const numberOfBalls = 40;
+  const numberOfBalls = 20;
   for (i = 0; i < numberOfBalls; i++) {
     const hShadow = -0.7 * (Math.random() - 0.5) * 3;
     const vShadow = -0.7 * Math.random() * 3;
@@ -109,7 +110,11 @@ export const Canvas = styled.canvas`
   left: 0;
 `;
 
-const InfoPanelBase = styled.div`
+export const InfoPanelSkeleton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
   position: fixed;
   height: 100px;
   left: 0;
@@ -118,14 +123,21 @@ const InfoPanelBase = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
-export const InfoPanelSkeleton = styled(InfoPanelBase)`
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  padding: 20px;
-`;
+export const InfoPanel = styled(Link)`
+  position: fixed;
+  height: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-decoration: none;
 
-export const InfoPanel = styled(InfoPanelBase)`
+  transition: 0.5s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
   display: grid;
 
   grid-template-columns: 1fr 3fr 1fr;
@@ -153,16 +165,16 @@ export const InfoPanelHeading = styled.h1`
   font-size: 1rem;
   height: fit-content;
   line-height: 1;
-  /* user-select: none; */
+  user-select: none;
   justify-self: left;
-  color: white;
   align-self: center;
+  color: white;
 `;
 
 export const InfoPanelSubheading = styled.h2`
   grid-area: subheading;
   text-align: left;
-  /* user-select: none; */
+  user-select: none;
   height: fit-content;
   font-size: 0.8rem;
   justify-self: left;
@@ -170,30 +182,14 @@ export const InfoPanelSubheading = styled.h2`
   color: white;
 `;
 
-export const InfoPanelButton = styled.button`
+export const InfoPanelButton = styled.h1`
   grid-area: button;
-  font-size: 1rem;
+  text-align: left;
+  font-size: 2rem;
+  height: fit-content;
+  line-height: 1;
   user-select: none;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-
-  font-family: "Roboto", sans-serif;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
-
-  &:hover {
-    background-color: #2ee59d;
-    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-    color: #fff;
-    transform: translateY(-7px);
-  }
+  justify-self: center;
+  align-self: center;
+  color: white;
 `;
