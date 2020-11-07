@@ -113,8 +113,24 @@ const Demolition: React.FC = () => {
 
   const currentProject = projectsMap.get(currentProjectId);
   const ProjectInfo = () => {
+    const Panel: React.FC = props => {
+      if (currentProject.isExternal) {
+        return (
+          <SC.InfoPanelExternal target="_blank" href={currentProject.link}>
+            {props.children}
+          </SC.InfoPanelExternal>
+        );
+      } else {
+        return (
+          <SC.InfoPanelInternal to={currentProject.link}>
+            {props.children}
+          </SC.InfoPanelInternal>
+        );
+      }
+    };
+
     return (
-      <SC.InfoPanel to={currentProject.link}>
+      <Panel>
         <SC.InfoPanelIcon
           alt={`${currentProject.id} icon`}
           src={currentProject.icon}
@@ -124,7 +140,7 @@ const Demolition: React.FC = () => {
           {currentProject.subtitle}
         </SC.InfoPanelSubheading>
         <SC.InfoPanelButton>></SC.InfoPanelButton>
-      </SC.InfoPanel>
+      </Panel>
     );
   };
 
@@ -133,7 +149,7 @@ const Demolition: React.FC = () => {
       <SC.InfoPanelSkeleton>
         <SC.InfoPanelHeading>
           Hi, I'm Nick! I'm a developer! These are my portfolio projects. Whack,
-          poke or haul them around with your mouse or finger! Stay zesty, Love
+          poke and haul them around with your mouse or finger! Stay zesty, Love
           Nick{" "}
           <span aria-label="orange emoji" role="img">
             🍊
