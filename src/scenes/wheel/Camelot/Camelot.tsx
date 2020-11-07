@@ -28,7 +28,7 @@ const Camelot = () => {
       <SC.Header></SC.Header>
 
       <SC.Body>
-        <SC.SegmentSvg height={500} width={500} viewBox={"-250 -250 500 500"}>
+        <SC.SegmentSvg viewBox={"-250 -250 500 500"}>
           <Wheel
             segmentDefinitions={majorRingSegmentDefinitions}
             radialOffset={5}
