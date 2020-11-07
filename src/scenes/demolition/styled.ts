@@ -110,11 +110,7 @@ export const Canvas = styled.canvas`
   left: 0;
 `;
 
-export const InfoPanelSkeleton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  padding: 20px;
+const InfoPanelBaseCss = css`
   position: fixed;
   height: 100px;
   left: 0;
@@ -123,13 +119,15 @@ export const InfoPanelSkeleton = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
-export const InfoPanel = styled(Link)`
-  position: fixed;
-  height: 100px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+export const InfoPanelSkeleton = styled.div`
+  ${InfoPanelBaseCss}
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+`;
+
+const LinkCss = css`
   text-decoration: none;
 
   transition: 0.5s;
@@ -147,6 +145,16 @@ export const InfoPanel = styled(Link)`
   grid-template-areas:
     "icon heading button"
     "icon subheading button";
+`;
+
+export const InfoPanelExternal = styled.a`
+  ${InfoPanelBaseCss}
+  ${LinkCss}
+`;
+
+export const InfoPanelInternal = styled(Link)`
+  ${InfoPanelBaseCss}
+  ${LinkCss}
 `;
 
 export const InfoPanelIcon = styled.img`
