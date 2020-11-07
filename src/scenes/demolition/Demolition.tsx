@@ -3,12 +3,12 @@ import Matter from "matter-js";
 
 import * as SC from "./styled";
 import useWindowDimensions from "./useWindowDimensions";
-
-import icons from "./icons";
+import projects, { Project, projectsMap } from "./projects";
 
 const Demolition: React.FC = () => {
   const containerRef = useRef(null);
-  const [label, setLabel] = useState("");
+  const [currentProjectId, setCurrentProjectId] = useState("");
+
   const { height, width } = useWindowDimensions();
 
   var Engine = Matter.Engine,
@@ -18,7 +18,6 @@ const Demolition: React.FC = () => {
     Mouse = Matter.Mouse,
     MouseConstraint = Matter.MouseConstraint;
 
-  console.log(label);
   useEffect(() => {
     if (!containerRef) return;
 
@@ -26,7 +25,7 @@ const Demolition: React.FC = () => {
       positionIterations: 20
     });
 
-    function createBall(icon: string) {
+    function createProjectBall(project: Project) {
       const minPixelRadius = 44; //guidelines for smallest button on phones
       const calculatedPixelRadius = width / 20;
       const radius =
@@ -37,10 +36,14 @@ const Demolition: React.FC = () => {
       const spriteScale = radius / spritePixelRadius;
       const ball = Bodies.circle(width / 2, height / 2, radius, {
         render: {
-          sprite: { xScale: spriteScale, yScale: spriteScale, texture: icon }
+          sprite: {
+            xScale: spriteScale,
+            yScale: spriteScale,
+            texture: project.icon
+          }
         },
         restitution: 0.5,
-        label: icon
+        label: project.id
       });
 
       World.add(engine.world, ball);
@@ -59,10 +62,7 @@ const Demolition: React.FC = () => {
       }
     });
 
-    const balls = Object.keys(icons).map(iconName => {
-      const test: { [key: string]: string } = icons;
-      return createBall(test[iconName]);
-    });
+    projects.forEach(project => createProjectBall(project));
 
     function wall(x: number, y: number, w: number, h: number) {
       return Bodies.rectangle(x, y, w, h, {
@@ -74,10 +74,11 @@ const Demolition: React.FC = () => {
     }
 
     const t = 200;
+    const baseElevation = 100;
     World.add(engine.world, [
       // x, y, width, height
       wall(width / 2, t / 2 - t, width, t), // top
-      wall(width / 2, height + t / 2, width, t), // bottom
+      wall(width / 2, height + t / 2 - baseElevation, width, t), // bottom
       wall(-t / 2, height / 2, t, height), // left
       wall(width + t / 2, height / 2, t, height) //right
     ]);
@@ -88,8 +89,7 @@ const Demolition: React.FC = () => {
       });
 
     Matter.Events.on(mouseConstraint, "startdrag", function(event) {
-      console.log(event.body);
-      setLabel(event.body.label);
+      setCurrentProjectId(event.body.label);
     });
 
     World.add(engine.world, mouseConstraint);
@@ -111,11 +111,39 @@ const Demolition: React.FC = () => {
     width
   ]);
 
+  const currentProject = projectsMap.get(currentProjectId);
+  const ProjectInfo = () => {
+    return (
+      <SC.InfoPanel>
+        <SC.InfoPanelIcon
+          alt={`${currentProject.id} icon`}
+          src={currentProject.icon}
+        />
+        <SC.InfoPanelHeading>{currentProject.title}</SC.InfoPanelHeading>
+        <SC.InfoPanelSubheading>
+          {currentProject.subtitle}
+        </SC.InfoPanelSubheading>
+        <SC.InfoPanelButton>Show Me More</SC.InfoPanelButton>
+      </SC.InfoPanel>
+    );
+  };
+
+  const InstructionSkeleton = () => {
+    return (
+      <SC.InfoPanelSkeleton>
+        <SC.InfoPanelHeading>
+          These are my projects, whack, poke or haul them around with your mouse
+          or finger!
+        </SC.InfoPanelHeading>
+      </SC.InfoPanelSkeleton>
+    );
+  };
+
   return (
     <SC.PageLayout>
       <SC.NeonText>Nick Rupp's Project Pit</SC.NeonText>
-      <SC.SubHeading>Throw 'em around, I don't care</SC.SubHeading>
       <SC.Canvas ref={containerRef} />
+      {currentProject ? <ProjectInfo /> : <InstructionSkeleton />}
     </SC.PageLayout>
   );
 };
