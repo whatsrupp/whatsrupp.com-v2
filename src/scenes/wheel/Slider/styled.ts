@@ -5,7 +5,12 @@ export const Wrapper = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-columns: 30px 300px 30px;
+  width: 100%;
+  grid-template-columns: 30px auto 30px;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "label label label"
+    "min slider max";
 `;
 
 export const Text = styled.p``;
@@ -37,10 +42,8 @@ export const ValueText = styled.p<ValueTextProps>`
 `;
 
 export const Label = styled.label`
-  justify-self: flex-end;
-  text-transform: uppercase;
-  position: absolute;
-  left: -150px;
+  grid-area: label;
+  justify-self: left;
 `;
 export const Input = styled.input`
   width: 100%;

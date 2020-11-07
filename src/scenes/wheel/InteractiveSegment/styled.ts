@@ -11,6 +11,7 @@ export const PageLayout = styled(PageLayoutComponent)`
 
 export const Header = styled.div``;
 export const Body = styled.div`
+  width: 100%;
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -20,6 +21,7 @@ export const Body = styled.div`
 export const Footer = styled.div``;
 
 export const SegmentSvg = styled.svg`
+  width: 60%;
   path {
     fill: ${colours.softBlack};
   }
