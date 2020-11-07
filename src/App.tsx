@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import withTracker from "./withTracker";
 
 import Portfolio from "./scenes/portfolio/Portfolio";
@@ -52,7 +52,6 @@ const App: React.FC = () => {
           exact
           component={withTracker(Wheel.Segment)}
         />
-        <Route render={() => <Redirect to={{ pathname: "/" }} />} />
       </Router>
     </div>
   );
