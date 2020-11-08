@@ -22,7 +22,7 @@ const Track: React.FC<ITrackProps> = ({
   const [waveSurfer, setWavesurfer] = useState(null);
   const [isPlaying, setIsPlaying] = useState(null);
   const [isMuted, setIsMuted] = useState(null);
-
+  console.log(isPlaying);
   const waveformRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

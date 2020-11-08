@@ -1,12 +1,10 @@
 {
-  "name": "app_name",
+  "name": "whatsrupp-portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.15",
     "@emotion/styled": "^10.0.15",
-    "@types/matter-js": "^0.14.5",
-    "aws-cdk": "^1.64.1",
     "axios": "^0.19.0",
     "echarts": "^4.4.0",
     "emotion": "^10.0.14",
@@ -17,11 +15,9 @@
     "react-ga": "^2.7.0",
     "react-icons": "^3.7.0",
     "react-inlinesvg": "^1.1.7",
-    "react-masonry-component": "^6.2.1",
     "react-page-scroller": "^1.5.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "typescript": "3.5.3",
     "wavesurfer.js": "^3.0.0"
   },
   "scripts": {
@@ -29,8 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "stylelint './src/**/*.ts'",
-    "cdk": "cdk"
+    "lint": "stylelint './src/**/*.ts'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,17 +43,11 @@
     ]
   },
   "devDependencies": {
-    "@aws-cdk/aws-certificatemanager": "^1.64.1",
-    "@aws-cdk/aws-cloudfront": "^1.64.1",
-    "@aws-cdk/aws-cloudfront-origins": "^1.64.1",
-    "@aws-cdk/aws-iam": "^1.64.1",
-    "@aws-cdk/aws-route53": "^1.64.1",
-    "@aws-cdk/aws-s3": "^1.64.1",
-    "@aws-cdk/core": "^1.64.1",
     "@testing-library/react": "^9.3.2",
     "@types/jest": "24.0.17",
     "@types/lodash": "^4.14.147",
     "@types/node": "12.7.1",
+    "@types/matter-js": "^0.14.5",
     "@types/react": "16.9.1",
     "@types/react-dom": "16.8.5",
     "@types/react-router-dom": "^4.3.4",
@@ -68,6 +57,7 @@
     "prettier-eslint": "^9.0.0",
     "prettier-eslint-cli": "^5.0.0",
     "prettier-stylelint": "^0.4.2",
+    "typescript": "3.5.3",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-prettier": "^1.1.1"

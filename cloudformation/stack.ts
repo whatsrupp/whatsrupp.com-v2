@@ -11,7 +11,7 @@ import {
 } from "@aws-cdk/aws-certificatemanager";
 
 import { Bucket } from "@aws-cdk/aws-s3";
-import { Distribution } from "@aws-cdk/aws-cloudfront";
+import { Distribution, ViewerProtocolPolicy } from "@aws-cdk/aws-cloudfront";
 import { S3Origin } from "@aws-cdk/aws-cloudfront-origins";
 
 export default class WebsiteStack extends Stack {
@@ -54,7 +54,10 @@ export default class WebsiteStack extends Stack {
       });
 
       const distribution = new Distribution(this, "websiteDistribution", {
-        defaultBehavior: { origin: new S3Origin(bucket) },
+        defaultBehavior: {
+          origin: new S3Origin(bucket),
+          viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS
+        },
         domainNames: [fqdn],
         certificate: certificate
       });

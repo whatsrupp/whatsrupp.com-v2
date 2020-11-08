@@ -9,7 +9,7 @@ export const useChordPlayer = () => {
     let currentAudioContext = audioContext;
     if (!currentAudioContext) {
       window.AudioContext =
-        (<any>window).AudioContext || (<any>window).webkitAudioContext;
+        (window as any).AudioContext || (window as any).webkitAudioContext;
       currentAudioContext = new AudioContext();
       setAudioContext(currentAudioContext);
     }
