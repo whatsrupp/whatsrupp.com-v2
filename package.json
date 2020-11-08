@@ -25,8 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "stylelint './src/**/*.ts'",
-    "cdk": "cdk"
+    "lint": "stylelint './src/**/*.ts'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,14 +43,6 @@
     ]
   },
   "devDependencies": {
-    "aws-cdk": "^1.64.1",
-    "@aws-cdk/aws-certificatemanager": "^1.64.1",
-    "@aws-cdk/aws-cloudfront": "^1.64.1",
-    "@aws-cdk/aws-cloudfront-origins": "^1.64.1",
-    "@aws-cdk/aws-iam": "^1.64.1",
-    "@aws-cdk/aws-route53": "^1.64.1",
-    "@aws-cdk/aws-s3": "^1.64.1",
-    "@aws-cdk/core": "^1.64.1",
     "@testing-library/react": "^9.3.2",
     "@types/jest": "24.0.17",
     "@types/lodash": "^4.14.147",
@@ -61,8 +52,6 @@
     "@types/react-dom": "16.8.5",
     "@types/react-router-dom": "^4.3.4",
     "@types/webaudioapi": "^0.0.27",
-    "ts-node": "^9.0.0",
-    "typescript": "3.5.3",
     "eslint-plugin-prettier": "^3.1.0",
     "prettier": "1.18.2",
     "prettier-eslint": "^9.0.0",
