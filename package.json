@@ -1,12 +1,10 @@
 {
-  "name": "app_name",
+  "name": "whatsrupp-portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.15",
     "@emotion/styled": "^10.0.15",
-    "@types/matter-js": "^0.14.5",
-    "aws-cdk": "^1.64.1",
     "axios": "^0.19.0",
     "echarts": "^4.4.0",
     "emotion": "^10.0.14",
@@ -17,11 +15,9 @@
     "react-ga": "^2.7.0",
     "react-icons": "^3.7.0",
     "react-inlinesvg": "^1.1.7",
-    "react-masonry-component": "^6.2.1",
     "react-page-scroller": "^1.5.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "typescript": "3.5.3",
     "wavesurfer.js": "^3.0.0"
   },
   "scripts": {
@@ -48,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "aws-cdk": "^1.64.1",
     "@aws-cdk/aws-certificatemanager": "^1.64.1",
     "@aws-cdk/aws-cloudfront": "^1.64.1",
     "@aws-cdk/aws-cloudfront-origins": "^1.64.1",
@@ -59,10 +56,13 @@
     "@types/jest": "24.0.17",
     "@types/lodash": "^4.14.147",
     "@types/node": "12.7.1",
+    "@types/matter-js": "^0.14.5",
     "@types/react": "16.9.1",
     "@types/react-dom": "16.8.5",
     "@types/react-router-dom": "^4.3.4",
     "@types/webaudioapi": "^0.0.27",
+    "ts-node": "^9.0.0",
+    "typescript": "3.5.3",
     "eslint-plugin-prettier": "^3.1.0",
     "prettier": "1.18.2",
     "prettier-eslint": "^9.0.0",
