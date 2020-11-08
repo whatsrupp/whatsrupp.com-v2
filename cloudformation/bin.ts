@@ -7,11 +7,12 @@ const app = new App({
   }
 });
 
-const accountId = process.argv[1];
+const accountId = process.env.AWS_ACCOUNT_ID;
 
 if (!accountId) {
-  throw new Error("Missing AWS Account Id cli argument");
+  throw new Error("Missing AWS_ACCOUNT_ID environment variable");
 }
+
 new Stack(app, "whatsrupp-website", {
   description: `All cloud infrastructure supporting whatsrupp.com`,
   env: {
