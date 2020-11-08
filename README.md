@@ -1,25 +1,35 @@
-# Whatsrupp.com Webapp
+# Whatsrupp Portfolio Website
+[![whatsrupp](https://circleci.com/gh/whatsrupp/whatsrupp.com-v2.svg?style=svg)](https://app.circleci.com/pipelines/github/whatsrupp/whatsrupp.com-v2)
 
-## About
+Like seemingly every other developer on the planet, I seem to churn out inane amounts of half finished scrappy side projects.  
 
-A half baked attempt to put all my things and thoughts into one place. 
+Sometimes those projects reach some sort of completed state, and when I get the time, I whack them up here.
+
+The end goal is to have a fun, highly interactive collection of projects that I can come back to in a bit of time to get that sweet sweet nostalgia buzz.
+
+## Check it Out
+
+If it's live - it's [here](https://www.nickrupp.co.uk/)!
+
+## Technical
 
 
-## Checking it out
+This website was built with React + Typescript. The only reason being that I used React for a couple of years at work and it's industry standard at the moment (Although lets see if Vue takes the lead...). 
+I ended up using emotion for css-in-js styling, because I wanted to try something different to styled-components. But, really, I think I'll swap this back when I find time.
+Testing is with jest and react-testing-library (Big Up Kent D). 
+I'd really like to add a bit of visual regression testing which I think would help with the more interactive html canvas based game elements.
 
-### Online
+I'm a sucker for a bit of AWS hosting and infrastructure as code. So this all gets distributed on a cloudformed CloudFront distribution network. The static files are stored on an S3 bucket configured as web hosting repository.
 
-If it's live - it's [here](https://whatsrupp.com/)!
+Tracking and analytics were just whacked together with Google Analytics. It's fairly painless. I'M WATCHING.
 
-### Offline
 
 #### Mock-Up
-If it isn't live you can either be content with this picture and leave it there:
+This was the mockup of the original website I made when I was applying for my first dev job. I'll leave it here just so I can see how much it's changed. Again, I think I get too nostalgic sometimes.
 
 <img align="center" src="/docs/assets/mockup.png" alt="mock-up">
 
 
-or you can set it up locally!
 
 #### Local Set-Up
 
@@ -37,13 +47,12 @@ or you can set it up locally!
 $ yarn
 ```
 
-#### 3) Start the server
-This a rack application. Run rackup in the terminal and it should set up a local server
+#### 3) Start the webpack-dev-server
 ```
 $ yarn start
 ```
+which will dynamically build the static files and serve them up at localhost:3000. Fun times.
 
-
-**_Thanks for reading and happy coding!_**
+**_If you made it this far, fair play to you... thanks for reading!_**
 
 _Nick Rupp_
