@@ -5,6 +5,8 @@ import * as SC from "./styled";
 import useWindowDimensions from "./useWindowDimensions";
 import projects, { Project, projectsMap } from "./projects";
 
+import * as analytics from "./analytics";
+
 const Demolition: React.FC = () => {
   const containerRef = useRef(null);
   const [currentProjectId, setCurrentProjectId] = useState("");
@@ -90,6 +92,7 @@ const Demolition: React.FC = () => {
 
     Matter.Events.on(mouseConstraint, "startdrag", function(event) {
       setCurrentProjectId(event.body.label);
+      analytics.ballDragEvent(event.body.label);
     });
 
     World.add(engine.world, mouseConstraint);
@@ -116,13 +119,24 @@ const Demolition: React.FC = () => {
     const Panel: React.FC = props => {
       if (currentProject.isExternal) {
         return (
-          <SC.InfoPanelExternal target="_blank" href={currentProject.link}>
+          <SC.InfoPanelExternal
+            onClick={() => {
+              analytics.infoPanelClickEvent(currentProjectId);
+            }}
+            target="_blank"
+            href={currentProject.link}
+          >
             {props.children}
           </SC.InfoPanelExternal>
         );
       } else {
         return (
-          <SC.InfoPanelInternal to={currentProject.link}>
+          <SC.InfoPanelInternal
+            onClick={() => {
+              analytics.infoPanelClickEvent(currentProjectId);
+            }}
+            to={currentProject.link}
+          >
             {props.children}
           </SC.InfoPanelInternal>
         );
