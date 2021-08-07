@@ -12,7 +12,6 @@ if [[ $(git diff --stat) != '' ]]; then
   exit 1;
 fi
 
-git push origin master
 
 ACCOUNT_ID=$(aws sts get-caller-identity | jq -r .Account)
 
@@ -22,6 +21,7 @@ BUCKET_NAME=whatsrupp-production
 
 aws s3 sync $SCRIPT_DIR/../build s3://$BUCKET_NAME --delete
 
+git push origin master
 cd $SCRIPT_DIR/..
 npm version patch
 new_version=$(jq .version package.json)
