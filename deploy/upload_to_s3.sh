@@ -12,6 +12,7 @@ if [[ $(git diff --stat) != '' ]]; then
   exit 1;
 fi
 
+git push origin master
 
 ACCOUNT_ID=$(aws sts get-caller-identity | jq -r .Account)
 
