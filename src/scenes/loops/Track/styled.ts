@@ -169,6 +169,7 @@ export const VolumeMutedIcon = styled(FaVolumeMute)`
   path {
     color: ${colours.yellow};
   }
+  cursor: pointer;
 `;
 
 export const VolumeUpIcon = styled(FaVolumeUp)`
@@ -177,6 +178,7 @@ export const VolumeUpIcon = styled(FaVolumeUp)`
   path {
     color: ${colours.yellow};
   }
+  cursor: pointer;
 `;
 
 export const MuteContainer = styled.div`
