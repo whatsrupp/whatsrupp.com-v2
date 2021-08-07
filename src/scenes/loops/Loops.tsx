@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import * as SC from "./styled";
 import * as images from "./assets/images";
@@ -6,25 +6,50 @@ import Metronome from "./Metronome";
 import MetronomeButton from "./MetronomeButton";
 import Tracks from "./Tracks";
 const Loops: React.FC = () => {
-  return (
-    <Metronome>
-      <SC.PageLayout>
-        <SC.Header>
-          <SC.Head src={images.jack} />
-          <SC.Head src={images.nick} />
-          <SC.Logo src={images.logo} />
-          <SC.Head src={images.will} />
-          <SC.Head src={images.viv} />
-        </SC.Header>
-        <SC.Body>
-          <Tracks />
+  const [hasInteracted, setHasInteracted] = useState(false);
 
-          <MetronomeButton />
-        </SC.Body>
-        <SC.Footer></SC.Footer>
-      </SC.PageLayout>
-    </Metronome>
+  /** We can't render the page here straight away because if we enter the loops page directly the user needs to interact with the page before we create an audio context (used in the <Metronome /> component)
+   * This is due to browser's autoplay policies eg chromes:
+   * https://developer.chrome.com/blog/autoplay/#webaudio
+   */
+  const AudioContextChecker: React.FC = () => (
+    <SC.PageLayout>
+      <SC.Header />
+
+      <SC.Body>
+        <SC.GetStartedButton
+          onClick={event => {
+            setHasInteracted(true);
+          }}
+        >
+          Get Looping
+        </SC.GetStartedButton>
+      </SC.Body>
+    </SC.PageLayout>
   );
+
+  if (!hasInteracted) {
+    return <AudioContextChecker></AudioContextChecker>;
+  } else {
+    return (
+      <Metronome>
+        <SC.PageLayout>
+          <SC.Header>
+            <SC.Head src={images.jack} />
+            <SC.Head src={images.nick} />
+            <SC.Logo src={images.logo} />
+            <SC.Head src={images.will} />
+            <SC.Head src={images.viv} />
+          </SC.Header>
+          <SC.Body>
+            <Tracks />
+            <MetronomeButton />
+          </SC.Body>
+          <SC.Footer></SC.Footer>
+        </SC.PageLayout>
+      </Metronome>
+    );
+  }
 };
 
 export default Loops;
