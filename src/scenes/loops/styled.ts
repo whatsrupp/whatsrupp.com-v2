@@ -124,6 +124,23 @@ export const Track = styled.div`
   }
 `;
 
+export const GetStartedButton = styled.button`
+  font-size: 1.1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  margin: 20px auto;
+  color: #ccc;
+  background-color: #555;
+  background: -webkit-linear-gradient(#888, #555);
+  background: linear-gradient(#888, #555);
+  border: 0 none;
+  border-radius: 3px;
+  text-shadow: 0 -1px 0 #000;
+  box-shadow: 0 1px 0 #666, 0 5px 0 #444, 0 6px 6px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+`;
+
 export const PlayButton = styled.button`
   background-color: ${colours.yellow};
   width: 50px;
