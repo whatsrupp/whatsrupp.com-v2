@@ -25,7 +25,8 @@ export default class WebsiteStack extends Stack {
     const bucket = new Bucket(this, "websiteBucket", {
       bucketName: "whatsrupp-production",
       publicReadAccess: true,
-      websiteIndexDocument: "index.html"
+      websiteIndexDocument: "index.html",
+      websiteErrorDocument: "index.html"
     });
 
     const hostedZoneDomainName = this.node.tryGetContext(
