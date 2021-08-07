@@ -7,12 +7,18 @@ if [[ "$BRANCH" != "master" ]]; then
   exit 1;
 fi
 
+if [[ $(git diff --stat) != '' ]]; then
+  echo 'cannot deploy from a dirty repo, commit or remove changes and try again'
+  exit 1;
+fi
+
 
 ACCOUNT_ID=$(aws sts get-caller-identity | jq -r .Account)
 
 yarn build
 
 BUCKET_NAME=whatsrupp-production
+
 aws s3 sync $SCRIPT_DIR/../build s3://$BUCKET_NAME --delete
 
 cd $SCRIPT_DIR/..
