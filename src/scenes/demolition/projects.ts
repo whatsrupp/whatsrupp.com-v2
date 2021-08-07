@@ -67,17 +67,17 @@ const projects = [
     description:
       "Over the years most of my weird coding side projects have ended up on github, it's a good place to have a snoop. I've also got my cv on there if you're interested."
   },
-  // {
-  //   id: projectIds.loops,
-  //   icon: icons.loops,
-  //   link: routes.LOOPS,
-  //   isExternal: false,
-  //   title: "Loops and Cats",
-  //   subtitle:
-  //     "A live looping recording station. Beatbox your boots and cats and make a fresh track.",
-  //   description:
-  //     "This was my first ever collaborative coding project. 3 friends and I wanted to rustle up something to quickly brainstorm musical ideas. A loop station is hardly original, but one that's quick and accessible in a browser has its perks. It turned out that it was very hard to keep audio playback for multiple tracks in sync. The original MVP code is here https://github.com/whatsrupp/loops-and-cats it was a single page javascript application written in vanilla js. The version on this website is my rewrite of it using react. "
-  // },
+  {
+    id: projectIds.loops,
+    icon: icons.loops,
+    link: routes.LOOPS,
+    isExternal: false,
+    title: "Loops and Cats",
+    subtitle:
+      "(DESKTOP ONLY) A live looping recording station. Beatbox your boots and cats and make a fresh track.",
+    description:
+      "This was my first ever collaborative coding project. 3 friends and I wanted to rustle up something to quickly brainstorm musical ideas. A loop station is hardly original, but one that's quick and accessible in a browser has its perks. It turned out that it was very hard to keep audio playback for multiple tracks in sync. The original MVP code is here https://github.com/whatsrupp/loops-and-cats it was a single page javascript application written in vanilla js. The version on this website is my rewrite of it using react. "
+  },
   {
     id: projectIds.wheel,
     icon: icons.wheel,

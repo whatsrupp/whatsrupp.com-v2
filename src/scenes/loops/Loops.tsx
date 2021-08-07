@@ -23,7 +23,7 @@ const Loops: React.FC = () => {
               setUserHasInteracted(true);
             }}
           >
-            Get Looping
+            Get Looping!!! (Only on Desktop though, sorry!)
           </SC.GetStartedButton>
         </SC.Body>
       </SC.PageLayout>
