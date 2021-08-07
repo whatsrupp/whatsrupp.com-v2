@@ -31,12 +31,12 @@ class Metronome extends React.Component<
   };
 
   timerWorker: any;
-  audioContext: any;
   currentBeatTime: number;
   currentBeat: number;
   currentBar: number;
   cues: any[];
   idCounter: number;
+  audioContext: AudioContext;
 
   constructor(props: types.MetronomeProps) {
     super(props);

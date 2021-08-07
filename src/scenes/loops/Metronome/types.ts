@@ -49,12 +49,3 @@ export type MetronomeState = {
   beat: number;
   bar: number;
 };
-
-type MetronomeRenderProps = {
-  audioContext: any;
-  createCue: (cueDefinition: cueDefinitionType) => number;
-  removeCue: (cueId: number) => void;
-  isPlaying: boolean;
-  beat: number;
-  bar: number;
-};
