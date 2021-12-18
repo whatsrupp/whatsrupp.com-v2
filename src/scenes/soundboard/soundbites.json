@@ -44,13 +44,7 @@
     {
       "path": "v1/Unbelievable.mp4",
       "id": "unbelievable",
-      "display": "Unbelievable (incensed)",
-      "version": "1"
-    },
-    {
-      "path": "v1/UnbelievableHappy.mp4",
-      "id": "unbelievable",
-      "display": "Unbelievable (chuffed)",
+      "display": "Unbelievable",
       "version": "1"
     },
     {
@@ -104,7 +98,7 @@
     {
       "path": "v3/hard_to_get.mp3",
       "id": "hard_to_get",
-      "display": "Hard to Get - Wait A Second",
+      "display": "Hmmmmm - That's Hard To Get",
       "version": "3"
     },
     {
@@ -176,7 +170,7 @@
     {
       "path": "v3/closing_the_door.mp3",
       "id": "closing_the_door",
-      "display": "Just Closing The Door (Stealthy)",
+      "display": "Just Closing The Door (stealthy)",
       "version": "3"
     },
     {
@@ -194,7 +188,7 @@
     {
       "path": "v3/ooo_weh.mp3",
       "id": "ooo_weh",
-      "display": "Oooooo weh (Ceilidh)",
+      "display": "Oooooo weh (ceilidh)",
       "version": "3"
     },
     {
