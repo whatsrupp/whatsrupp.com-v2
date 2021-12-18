@@ -9,6 +9,19 @@ declare module "*.mp3" {
   export default src;
 }
 
+declare module "*/samples.yaml" {
+  const src: [
+    {
+      path: string;
+      importName: string;
+      id: string;
+      display: string;
+      version: string;
+    }
+  ];
+  export default src;
+}
+
 declare module "wavesurfer.js";
 declare module "wavesurfer.js/src/plugin/microphone.js";
 declare module "react-page-scroller";
