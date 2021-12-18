@@ -4,6 +4,11 @@ declare module "*.mp4" {
   export default src;
 }
 
+declare module "*.mp3" {
+  const src: string;
+  export default src;
+}
+
 declare module "wavesurfer.js";
 declare module "wavesurfer.js/src/plugin/microphone.js";
 declare module "react-page-scroller";
