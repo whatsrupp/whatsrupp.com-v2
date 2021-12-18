@@ -6,17 +6,19 @@ type SoundboardButtonProps = {
   audioFile: string;
   text: string;
   version: string;
+  soundbiteId: string;
 };
 
 const SoundboardButton: React.FC<SoundboardButtonProps> = ({
   audioFile,
   text,
-  version
+  version,
+  soundbiteId
 }) => {
   const audio = new Audio(audioFile);
   const handleClick = () => {
     audio.play();
-    clickSoundboardButton();
+    clickSoundboardButton(soundbiteId);
   };
 
   let Button;
