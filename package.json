@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "stylelint './src/**/*.ts'"
+    "lint": "stylelint './src/**/*.ts'",
+    "deploy": "./deploy/upload_to_s3.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
