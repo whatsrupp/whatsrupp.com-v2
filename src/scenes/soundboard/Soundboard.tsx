@@ -19,16 +19,20 @@ const Soundboard: React.FC = () => {
         <SC.PageTitle>Soundboard King v3</SC.PageTitle>
       </SC.Header>
       <SC.Body>
-        {soundbites.map(soundbite => {
-          return (
-            <SoundboardButton
-              text={soundbite.display}
-              audioFile={require(`./assets/audio/${soundbite.path}`)}
-              version={soundbite.version}
-              soundbiteId={soundbite.id}
-            />
-          );
-        })}
+        {soundbites
+          .sort((a, b) => {
+            return Number(a.version) - Number(b.version);
+          })
+          .map(soundbite => {
+            return (
+              <SoundboardButton
+                text={soundbite.display}
+                audioFile={require(`./assets/audio/${soundbite.path}`)}
+                version={soundbite.version}
+                soundbiteId={soundbite.id}
+              />
+            );
+          })}
       </SC.Body>
 
       <SC.Footer>
