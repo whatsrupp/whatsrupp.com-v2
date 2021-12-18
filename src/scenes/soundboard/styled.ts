@@ -20,15 +20,15 @@ export const Button = styled.button`
 `;
 
 export const ButtonV1 = styled(Button)`
-  background-color: #567c82;
+  background-color: ${colours.lightPurple};
 `;
 
 export const ButtonV2 = styled(Button)`
-  background-color: #002c82;
+  background-color: ${colours.purple};
 `;
 
 export const ButtonV3 = styled(Button)`
-  background-color: #533c82;
+  background-color: ${colours.deepPurple};
 `;
 
 const spinClockwise = keyframes`
@@ -97,9 +97,11 @@ export const BadgeContainer = styled.div`
 `;
 
 export const PageLayout = styled(PageLayoutComponent)`
-  background: ${colours.teal};
+  background: ${colours.orange};
   display: grid;
   grid-template-rows: 1fr 3fr 0.5fr;
+  min-height: 100vh;
+  height: 100%;
 `;
 
 export const Header = styled.div``;
