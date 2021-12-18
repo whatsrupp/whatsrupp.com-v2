@@ -1,5 +1,5 @@
 import React from "react";
-
+import { clickSoundboardButton } from "./analytics";
 import * as SC from "./styled";
 
 type SoundboardButtonProps = {
@@ -16,6 +16,7 @@ const SoundboardButton: React.FC<SoundboardButtonProps> = ({
   const audio = new Audio(audioFile);
   const handleClick = () => {
     audio.play();
+    clickSoundboardButton();
   };
 
   let Button;
