@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
+import { keyframes } from "@emotion/core";
 
 import PageLayoutComponent from "../../style/components/PageLayout";
 import * as colours from "../../style/colours";
+import UnstyledBadge from "./Badge";
 
 export const Button = styled.button`
   color: white;
@@ -14,6 +16,83 @@ export const Button = styled.button`
   margin: 10px;
   :hover {
     cursor: pointer;
+  }
+`;
+
+export const ButtonV1 = styled(Button)`
+  background-color: #567c82;
+`;
+
+export const ButtonV2 = styled(Button)`
+  background-color: #002c82;
+`;
+
+export const ButtonV3 = styled(Button)`
+  background-color: #533c82;
+`;
+
+const spinClockwise = keyframes`
+    from {
+        transform:rotate(0deg) scale(1);
+    }
+    10% {
+      transform:rotate(360deg) scale(1.5);
+
+    }
+    70%{
+      transform:rotate(20deg) scale(1);
+
+    }
+    to {
+        transform:rotate(0deg) scale(1);
+
+    }
+`;
+
+const spinAntiClockwise = keyframes`
+    from {
+        transform:rotate(0deg) scale(1);
+    }
+    10% {
+      transform:rotate(-360deg) scale(1.5);
+
+    }
+    70%{
+      transform:rotate(-20deg) scale(1);
+
+    }
+    to {
+        transform:rotate(0deg) scale(1);
+
+    }
+`;
+
+export const BadgeOuter = styled(UnstyledBadge)`
+  animation: ${spinClockwise} 10s ease infinite;
+  path {
+    fill: ${colours.softBlack};
+  }
+  height: 100px;
+  width: 100px;
+`;
+
+export const BadgeInner = styled(UnstyledBadge)`
+  animation: ${spinAntiClockwise} 10s ease infinite;
+  path {
+    fill: ${colours.deepPurple};
+  }
+  height: 70px;
+  width: 70px;
+`;
+
+export const BadgeContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center;
+  * {
+    grid-area: 1 / 1 / 2 / 2;
   }
 `;
 
@@ -32,6 +111,7 @@ export const Footer = styled.div``;
 export const Picture = styled.img`
   height: 100px;
   margin: 20px;
+  z-index: 1;
 `;
 
 export const PageTitle = styled.h1`
