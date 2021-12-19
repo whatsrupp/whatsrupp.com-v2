@@ -50,7 +50,7 @@
     {
       "path": "v2/YouAreKiddingMe.mp4",
       "id": "you_are_kidding_me",
-      "display": "You Are Kidding Mee",
+      "display": "You Are Kidding Me",
       "version": "2"
     },
     {
@@ -126,12 +126,6 @@
       "version": "3"
     },
     {
-      "path": "v3/legally_fuck_off.mp3",
-      "id": "legally_fuck_off",
-      "display": "Do You Want To Legally Fuck Off?",
-      "version": "3"
-    },
-    {
       "path": "v3/badda_friggin_bing_sexy.mp3",
       "id": "badda_friggin_bing_sexy",
       "display": "Badda Frigging Bing (sexy)",
@@ -159,6 +153,12 @@
       "path": "v3/bof_quiet.mp3",
       "id": "bof_quiet",
       "display": "Bof",
+      "version": "3"
+    },
+    {
+      "path": "v3/bof_emphatic.mp3",
+      "id": "bof_emphatic",
+      "display": "Bof (emphatic)",
       "version": "3"
     },
     {
